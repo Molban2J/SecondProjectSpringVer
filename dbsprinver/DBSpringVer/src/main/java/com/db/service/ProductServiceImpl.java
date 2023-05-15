@@ -91,4 +91,9 @@ public class ProductServiceImpl implements ProductService {
 		return productmapper.countCart(userid);
 	}
 
+	@Override
+	public ProductVO productDetailByPname(String pname) throws Exception {
+		return productmapper.productDetailByPname(pname);
+	}
+
 }

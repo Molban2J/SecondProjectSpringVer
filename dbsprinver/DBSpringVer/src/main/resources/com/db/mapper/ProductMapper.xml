@@ -155,5 +155,10 @@
 	<select id="countCart" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM cart WHERE userid = #{userid}
 	</select>
+	
+	<!-- 제품 이름으로 제품상세 불러오기 -->
+	<select id="productDetailByPname" resultType="com.db.model.ProductVO">
+		select * from product where pname = #{pname} and rownum = 1
+	</select>
 
 </mapper>

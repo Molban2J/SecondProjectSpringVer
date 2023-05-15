@@ -45,5 +45,8 @@ public interface ProductMapper {
 	
 	//장바구니 상품 갯수 불러오기
 	public int countCart(String userid);
+	
+	//상품 상세(제품 이름으로 검색)
+	public ProductVO productDetailByPname(String pname);
 
 }

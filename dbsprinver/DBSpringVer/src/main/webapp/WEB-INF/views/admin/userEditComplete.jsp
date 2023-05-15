@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<script type="text/javascript">
+window.opener.parent.location.href = "DBServlet?command=user_management";
+window.close();
+</script>
 </body>
 </html>

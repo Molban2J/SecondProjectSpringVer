@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.AdminMapper">
+<insert id = "insertAuction">
+	insert into auction (userId, bName, pName, price, startPrice, endTime, onOff, pSize, imgUrl,num) 
+	values(#{userId}, #{bName}, #{pName}, #{price}, #{startPrice}, #{endTime}, 1, #{pSize}, #{imgUrl},auction_seq.nextval)
+</insert>
+<select id="getUserList" resultType="com.db.model.UserVO">
+	select * from shopuser
+</select>
+<delete id="deleteUser">
+	delete shopuser where userid = #{userid}
+</delete>
+<select id="getUser" resultType="com.db.model.UserVO">
+	select * from shopuser where userid = #{userid}
+</select>
+</mapper>
