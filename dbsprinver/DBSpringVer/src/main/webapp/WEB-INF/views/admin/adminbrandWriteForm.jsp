@@ -10,7 +10,7 @@
 <body>
 <div>
 <h1>브랜드 등록</h1>
-	<form action="DBServlet" method="post" enctype="multipart/data-form" name="frm">
+	<form enctype="multipart/data-form" name="frm">
 		<table>
 		<tr>
 		<td>브랜드 명</td>

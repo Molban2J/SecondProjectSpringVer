@@ -20,7 +20,18 @@ function open_win(url) {
    window.open(url, "width=900, height=300");
 }
 
-
+function userCheck(){
+	if (document.frm.userid.value == "") {
+      alert('아이디를 입력하여 주십시오.');
+      document.formm.userid.focus();
+      return;
+   }
+   if (document.frm.name.value.length == 0) {
+      alert("이름을 써주세요.");
+      frm.name.focus();
+      return false;
+   }
+}
 
 
 

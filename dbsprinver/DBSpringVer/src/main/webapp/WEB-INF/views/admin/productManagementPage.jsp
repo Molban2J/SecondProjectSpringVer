@@ -23,7 +23,7 @@
 				<div class="mypage-btns">
 					<div class="mypage-menu">
 						<ul>
-							<button type="button" onclick="location.href='DBServlet?command=admin_brand_list'">브랜드 관리</button>
+							<button type="button" onclick="location.href='admin/adminBrandList'">브랜드 관리</button>
 							<button type="button" onclick="location.href='DBServlet?command=product_list'">상품 관리</button>
 						</ul>
 					</div>

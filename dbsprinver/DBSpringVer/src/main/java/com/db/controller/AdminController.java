@@ -1,9 +1,12 @@
 package com.db.controller;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +34,10 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
+	//옥션 시작
+	
 	@GetMapping("auctionPage")
-	public void AuctionPage(HttpServletRequest request) {
+	public void AuctionPage() {
 		System.out.println("auctionPage 접속");
 	}
 	
@@ -73,9 +78,13 @@ public class AdminController {
 			rttr.addFlashAttribute("result", 0);
 		}
 		
-		return "redirect:/home";
+		return "redirect:/";
 	}
+	//옥션 끝
 	
+	
+	//회원관리 시작
+	//회원관리 페이지
 	@GetMapping("userManagementPage")
 	public void userManagementpageGET(Model model) throws Exception {
 		System.out.println("userManagementPage 접속");
@@ -83,6 +92,7 @@ public class AdminController {
 		model.addAttribute("shopUser",user);
 	}
 	
+	//회원정보 수정
 	@GetMapping("userManagementEdit")
 	public void userManagementEditGET(String userid, Model model) throws Exception {
 		System.out.println("userManagementEdit 접속");
@@ -90,17 +100,42 @@ public class AdminController {
 		model.addAttribute("shopUser", user);
 	}
 	
-	@GetMapping("userDelete.do")
-	public String userDeleteGET(String userid) throws Exception {
-		adminService.deleteUser(userid);
-		return "redirect:/userManagementPage";
+	//회원 삭제
+	@GetMapping("userDelete")
+	public String userDeleteGET(String shopUserid) throws Exception {
+		System.out.println("userDelete 접속");
+		adminService.deleteUser(shopUserid);
+		return "redirect:/admin/userManagementPage";
 	}
 	
+	//회원 수정 완료
 	@PostMapping("userEditComplete.do")
 	public String userEditCompletePOST(UserVO vo) throws Exception {
+		System.out.println("userEditComplete.do 접속");
 		userService.userUpdate(vo);
+		System.out.println("userupdate: " + userService.userUpdate(vo));
 		return "/admin/userEditComplete";
 	}
+	//회원관리 끝
 	
+	//상품 관리 시작
+	//상품관리 페이지
+	@GetMapping("productManagementPage")
+	public void productManageGET() {
+		System.out.println("productManagementPage 접속");
+	}
+	//브랜드 리스트
+	@GetMapping("adminBrandList")
+	public void adminBrandListGET(Model model) throws Exception {
+		System.out.println("adminBrandList 접속");
+		List<BrandVO> bList = productService.brandList();
+		model.addAttribute("brand",bList);
+	}
+	//브랜드 등록페이지
+	@GetMapping("adminbrandWriteForm")
+	public void adminBrandWriteFormGET() {
+		System.out.println("adminbrandWriteForm 접속");
+	}
 	
+	//상품관리 끝
 }

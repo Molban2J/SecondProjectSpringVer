@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>브랜드 리스트 관리</title>
-<script type="text/javascript" src="script/admin.js"></script>
+<script type="text/javascript" src="../resources/js/admin.js"></script>
 <style type="text/css">
 img{
 	width: 400px;
@@ -19,7 +19,7 @@ img{
 	<h1>브랜드 리스트 관리</h1>
 		<ul style="list-style: none;">
 		<li>
-			<input type="button" value="브랜드 등록" onclick="location.href='DBServlet?command=admin_brand_write_form'">
+			<input type="button" value="브랜드 등록" onclick="location.href='/admin/adminbrandWriteForm'">
 		</li>
 			<c:forEach var="brand" items="${brand }">
 				<li>
@@ -28,7 +28,7 @@ img{
 				<input type="button" value="DELETE" onclick="deleteBrand('${brand.bName}');">
 			</c:forEach>
 		</ul>
-		<input type="button" value="뒤로가기" onclick="location.href='DBServlet?command=product_management'">
+		<input type="button" value="뒤로가기" onclick="location.href='/admin/adminBrandList'">
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>

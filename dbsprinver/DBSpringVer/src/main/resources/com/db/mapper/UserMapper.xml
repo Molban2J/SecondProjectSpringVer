@@ -40,7 +40,8 @@
 		update shopuser set pass = #{pass}, name = #{name},
 		email = #{email},
 		address1 = #{address1}, address2 = #{address2},
-		address3 = #{address3}, phone = #{phone}, gender = #{gender}
+		address3 = #{address3}, phone = #{phone}, gender = #{gender}, point = #{point},
+		grade = #{grade}
 		where userid = #{userid}
 
 	</update>

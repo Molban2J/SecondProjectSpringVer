@@ -45,7 +45,6 @@ td {
 		<table class="list">
 			<tr>
 				<th>아이디</th>
-				<th class="pw">비밀번호</th>
 				<th>이름</th>
 				<th>성별</th>
 				<th>이메일</th>
@@ -61,7 +60,6 @@ td {
 			<c:forEach var="shopUser" items="${shopUser }">
 				<tr class="button">
 					<td>${shopUser.userid }</td>
-					<td>${shopUser.pass }</td>
 					<td>${shopUser.name }</td>
 					<c:choose>
 						<c:when test="${shopUser.gender==1}">
@@ -101,9 +99,11 @@ td {
 					</c:choose>
 					<td>${shopUser.point }</td>
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
-					<td class="hiddenbutton"><input type="button" class="btn-primary px-3" value="수정" onclick="open_win('/admin/userManagementEdit&userid=${shopUser.userid }')"> <input type="button" class="btn-primary px-3" value="삭제"
-						onclick="location.href='/admin/userDelete.do&shopUserid=${shopUser.userid }'"></td>
-
+				
+					<td class="hiddenbutton"><input type="button" class="btn-primary px-3" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${shopUser.userid }')"> <input type="button" class="btn-primary px-3 delete" value="삭제"
+						onclick="location.href='/admin/userDelete?shopUserid=${shopUser.userid }'"></td>
+						 
+						 
 				</tr>
 			</c:forEach>
 		</table>
@@ -119,6 +119,7 @@ td {
 			// 새 창을 엽니다.
 			window.open(url, "_blank", specs);
 		}
+		
 	</script>
 	 
 </body>

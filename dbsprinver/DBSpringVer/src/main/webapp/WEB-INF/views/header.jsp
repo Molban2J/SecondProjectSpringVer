@@ -131,11 +131,10 @@
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
 									<div class="dropdown-menu rounded-0 m-0">
 										<a href="/admin/userManagementPage" class="dropdown-item">회원 관리</a>
-										<a href="" class="dropdown-item">게시판 관리</a>
+										<a href="/admin/boardManagementPage" class="dropdown-item">게시판 관리</a>
 										<a href="/admin/auctionPage" class="dropdown-item">옥션 관리</a>
-										<a href="" class="dropdown-item">핫딜 관리</a>
-										<a href="" class="dropdown-item">상품 관리</a>
-										<a href="" class="dropdown-item">매출 관리</a>
+										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
+										<a href="/admin/salesManagementPage" class="dropdown-item">매출 관리</a>
 									</div>
 								</div>
 							</c:if>
