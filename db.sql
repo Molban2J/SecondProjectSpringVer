@@ -1,9 +1,9 @@
-    /* 4.19 update 10:00 */
-    
+  
 drop sequence freeboard_seq; 
 drop sequence cart_seq;
 drop sequence product_seq;
 drop sequence qnaboard_seq;
+drop sequence coupon_seq;
 drop sequence orders_seq;
 drop sequence order_detail_seq;
 drop sequence auction_seq;
@@ -12,6 +12,7 @@ create sequence freeboard_seq start with 1 increment by 1;
 create sequence cart_seq start with 1 increment by 1;
 create sequence product_seq start with 1 increment by 1;
 create sequence qnaboard_seq start with 1 increment by 1;
+create sequence coupon_seq start with 1 increment by 1;
 create sequence orders_seq start with 1 increment by 1;
 create sequence order_detail_seq start with 1 increment by 1;
 create sequence auction_seq start with 1 increment by 1;
@@ -20,13 +21,15 @@ drop table freeboard;
 drop table purchased;
 drop table cart;
 drop table auction;
-drop table hotdeal;
 drop table qnaboard;
+drop table coupon;
 drop table order_detail;
 drop table orders;
 drop table shopuser;
 drop table product;
 drop table brand;
+
+DROP VIEW order_view;
 
 
 /*shopuser*/
@@ -87,7 +90,7 @@ cartNum number(5) primary key, /*sequence*/
 userid VARCHAR2(20) not null,/*fk - shopuser userid*/	     	    
 num NUMBER(5) not null,/*fk - product num*/
 pSize VARCHAR2(10),
-quantity NUMBER(10) default 0,
+quantity NUMBER(10),
 price NUMBER(10) default 0 not null,
 orderDate DATE default sysdate,
 result char(1) default 1 /*0418 update*/ /*1 주문 확인 중 2 주문 처리 중*/
@@ -108,7 +111,6 @@ endTime DATE,
 onoff number(1)
 );
 
-/*hotdeal* 0418 DROP */
 
 /*product*/
 CREATE TABLE PRODUCT(  /*update 0413 */
@@ -119,6 +121,7 @@ kind NUMBER(1),
 pName VARCHAR2(200) not null,
 imgUrl VARCHAR2(300), 
 pSize VARCHAR2(10),
+discountrate Number(3) default 0,
 balance NUMBER(10) DEFAULT 0,
 price NUMBER(10) not null,
 purchasedNum NUMBER(10) DEFAULT 0,
@@ -144,29 +147,55 @@ imgurl VARCHAR2(300),
 readcount NUMBER(5) DEFAULT 0
 );
 
+/* coupon */
+CREATE TABLE coupon (
+  userid VARCHAR2(20),
+  couponname VARCHAR2(20),
+  cnum NUMBER(10) NOT NULL PRIMARY KEY,
+  discountprice NUMBER(10) NOT NULL,
+  couponresult number(10) default(1),
+  imgurl varchar2(300),
+  CONSTRAINT fk_coupon_userid FOREIGN KEY (userid) REFERENCES shopuser (userid)
+);
+
+
 /* orders */
-create table orders(
-orderNumber number(10) not null primary key, /*seq*/
-userid VARCHAR2(20), /*fk*/
-indate date default sysdate
+CREATE TABLE orders (
+  orderNumber NUMBER(10) NOT NULL PRIMARY KEY, /*seq*/
+  userid VARCHAR2(20), /*fk*/
+  indate DATE DEFAULT sysdate
 );
 
 /*order_detail*/
-create table order_detail(
-orderDetailNumber number(10) not null primary key, /*seq*/
-orderNumber number(10),
-num number(5), /* FK product */
-quantity number(5),
-totalPrice number(10),
-result char(1) default 1 /*1 주문 확인 중 2 주문 처리 중*/
+CREATE TABLE order_detail (
+  orderDetailNumber NUMBER(10) NOT NULL PRIMARY KEY, /*seq*/
+  orderNumber NUMBER(10),
+  num NUMBER(5), /* FK product */
+  quantity NUMBER(5),
+  price NUMBER(10) default 0 not null,
+  totalPrice NUMBER(10),
+  pSize VARCHAR2(10),
+  imgUrl varchar2(300),
+  pName VARCHAR2(200) not null,
+  result CHAR(1) DEFAULT 1 /*1 주문 확인 중 2 주문 처리 중*/
 );
 
-/* join table(order, order_detail) */  /*0419 1000*/
+/* join table(order, order_detail) */
 CREATE VIEW order_view AS
-SELECT orders.orderNumber, orders.userid, orders.indate, order_detail.orderDetailNumber, order_detail.num, order_detail.quantity, order_detail.result
-FROM orders
-JOIN order_detail
-ON orders.orderNumber = order_detail.orderNumber;
+SELECT
+  orders.orderNumber,
+  orders.userid,
+  orders.indate,
+  order_detail.orderDetailNumber,
+  order_detail.num,
+  order_detail.quantity,
+  order_detail.result
+FROM
+  orders
+JOIN
+  order_detail
+ON
+  orders.orderNumber = order_detail.orderNumber;
 
 
 /*FK*/
@@ -219,14 +248,15 @@ FOREIGN KEY (userid) REFERENCES shopuser (userid) ON DELETE CASCADE;
 /* update */
 
 UPDATE shopuser
-SET point = point + 500000
-WHERE userid = 'test2';
+SET point = point + 50000
+WHERE userid = 'user';
 
 /*select*/
 select * from shopuser;
 select * from qnaboard;
 select * from brand;
 select * from cart;
+select * from coupon;
 select * from product;
 select * from auction;
 select * from orders;
@@ -234,9 +264,10 @@ select * from order_detail;
 desc order_detail;
 
 
+
 /*insert*/  /*0419 1000*/
 insert into shopuser values('admin','$2a$10$oC0NmZtmTQmBZgKDeXZwFe/VFGb0KgupZl0e.637agg1MNeEdy5e6','관리자', '12345@gamil.com', '12345', '서울특별시 인사동 12길 ', '대일빌딩 , 하이미디어 15층, 16호 ', '01012344321', '1', '1', '0','2023/04/13');
-insert into shopuser values('user','$2a$10$oC0NmZtmTQmBZgKDeXZwFe/VFGb0KgupZl0e.637agg1MNeEdy5e6','유저', '12345@gamil.com', '12345', '서울특별시 인사동 12길 ', '대일빌딩 , 하이미디어 15층, 16호 ', '01012344321', '1', '0', '0','2023/04/13');
+insert into shopuser values('user','$2a$10$oC0NmZtmTQmBZgKDeXZwFe/VFGb0KgupZl0e.637agg1MNeEdy5e6','유저', '12345@gamil.com', '12345', '서울특별시 인사동 12길 ', '대일빌딩 , 하이미디어 15층, 16호 ', '01012344321', '1', '4', '0','2023/04/13');
 insert into shopuser values('test','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','유저', '12345@gamil.com', '12345', '서울특별시 인사동 12길 ', '대일빌딩 , 하이미디어 15층, 16호 ', '01012344321', '1', '0', '0','2023/04/13');
 insert into shopuser values('test2','$2a$10$oC0NmZtmTQmBZgKDeXZwFe/VFGb0KgupZl0e.637agg1MNeEdy5e6','유저', '12345@gamil.com', '12345', '서울특별시 인사동 12길 ', '대일빌딩 , 하이미디어 15층, 16호 ', '01012344321', '1', '2', '0','2023/04/13');
 
@@ -256,11 +287,11 @@ FOR EACH ROW
 DECLARE
   new_grade NUMBER(10);
 BEGIN
-  IF :new.point >= 1500000 THEN
+  IF :new.point >= 500000 THEN
     new_grade := 4;
-  ELSIF :new.point >= 500000 THEN
-    new_grade := 3;
   ELSIF :new.point >= 100000 THEN
+    new_grade := 3;
+  ELSIF :new.point >= 30000 THEN
     new_grade := 2;
   ELSE
     new_grade := 0;

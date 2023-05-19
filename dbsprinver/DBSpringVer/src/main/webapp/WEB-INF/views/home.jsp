@@ -25,19 +25,6 @@
 	</div>
 	<!-- Categories End -->
 	<hr>
-	<script type="text/javascript">
-	$(document).ready(function(){
-	let result = '<c:out value="${result}"/>';
-	checkResult(result);
-	
-	function checkResult(result){
-		if(result == ''){
-			return;
-		}
-		alert("옥션을 성공적으로 등록했습니다.");
-	}
-});
-	</script>
 </body>
 <jsp:include page="footer.jsp"></jsp:include>
 </html>

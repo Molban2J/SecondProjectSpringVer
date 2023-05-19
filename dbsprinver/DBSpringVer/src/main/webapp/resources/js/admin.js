@@ -3,7 +3,7 @@
  */
 function deleteBrand(bname) {
   if (confirm("삭제하면 브랜드 내의 모든 상품이 사라집니다. 브랜드를 삭제하시겠습니까?")) {
-    location.href = 'brandDelete&brandname=' + bname;
+    location.href = 'DBServlet?command=brand_delete&brandname=' + bname;
   }
 }
 
@@ -18,7 +18,6 @@ function brandCheck(){
 function go_bw()
 {
 var theForm = document.frm
-theForm.action = "/admin/adminBrandWrite.do";
-theForm.method = "post"; 
+theForm.action = "DBServlet?command=admin_brand_write"; 
 theForm.submit();
 }
