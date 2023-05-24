@@ -231,10 +231,16 @@
 		#{userid})
 	</select>
 
+	    
+    <!-- 제품 이름으로 제품상세 불러오기 -->
+    <select id="productDetailByPname" resultType="com.db.model.ProductVO">
+        select * from product where pname = #{pname} and rownum = 1
+    </select>
 
 
-
-
+	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
+		select * from auction order by endTime
+	</select>
 
 
 

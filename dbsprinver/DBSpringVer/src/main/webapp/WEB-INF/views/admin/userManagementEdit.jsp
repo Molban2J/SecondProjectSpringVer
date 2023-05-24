@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="css/shopuserTheme.css">
 <script type="text/javascript" src="..resources/js/shopuser.js"></script>
  -->
+ <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+ 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -18,7 +20,7 @@
 			<table class="list">
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="userid" value="${shopUser.userid }" readonly="readonly"></td>
+					<td><input name="userid" value="${shopUser.userid }" readonly="readonly"></td>
 					<th>비밀번호</th>
 					<td><input type="text" name="pass" value="${shopUser.pass }" readonly="readonly"></td>
 					<th>이름</th>
@@ -110,8 +112,9 @@
 				</tr>
 
 			</table>
-			<input type="submit" value="수정">
+			<input class="modify" value="수정" type="submit" >
 		</form>
 	</div>
+
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.mapper.ProductMapper;
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.ProductVO;
@@ -125,6 +126,16 @@ public class ProductServiceImpl implements ProductService {
 	public CartVO addOrders(String userid) throws Exception {
 		
 		return productmapper.addOrders(userid);
+	}
+
+    @Override
+    public ProductVO productDetailByPname(String pname) throws Exception {
+        return productmapper.productDetailByPname(pname);
+    }
+
+	@Override
+	public ArrayList<AuctionVO> getAuctionList() throws Exception {
+		return productmapper.getAuctionList();
 	}
 
 }

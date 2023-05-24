@@ -26,13 +26,13 @@ public class AdminMapperTests {
 		ProductVO pVo = pMapper.productDetail(1);
 		LocalDateTime currentDateTime = LocalDateTime.now();
 	    Timestamp timestamp = Timestamp.valueOf(currentDateTime);
-		vo.setBName(pVo.getBname());
-		vo.setPName(pVo.getPname());
+		vo.setbName(pVo.getBname());
+		vo.setpName(pVo.getPname());
 		vo.setPrice(pVo.getPrice());
 		vo.setEndTime(timestamp);
 		vo.setEndPrice(0);
 		vo.setImgUrl(pVo.getImgUrl());
-		vo.setPSize(pVo.getPsize());
+		vo.setpSize(pVo.getPsize());
 		vo.setStartPrice(0);
 		vo.setUserId("admin");
 		mapper.insertAuction(vo);

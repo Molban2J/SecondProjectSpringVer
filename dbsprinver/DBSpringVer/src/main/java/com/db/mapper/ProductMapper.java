@@ -3,11 +3,10 @@ package com.db.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
-import com.db.model.OrderVO;
 import com.db.model.ProductVO;
-import com.db.model.UserVO;
 
 public interface ProductMapper {
 
@@ -64,5 +63,13 @@ public interface ProductMapper {
 	
 	// 결제 정보 추가(orders table)
 	public CartVO addOrders(String userid);
+	
+	//제품 이름으로 제품 불러오기
+	public ProductVO productDetailByPname(String name);
+	
+	//옥션 목록 가져오기
+	public ArrayList<AuctionVO> getAuctionList();
+	
+	
 
 }

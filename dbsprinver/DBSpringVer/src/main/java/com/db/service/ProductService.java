@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.ProductVO;
@@ -65,5 +66,11 @@ public interface ProductService {
 	
 	// 결제 정보 추가(orders table)
 	public CartVO addOrders(String userid) throws Exception;
+	
+    //상품 상세(제품 이름으로 검색
+    public ProductVO productDetailByPname(String pname) throws Exception;
+    
+  //옥션 목록 가져오기
+  	public ArrayList<AuctionVO> getAuctionList() throws Exception;
 
 }
