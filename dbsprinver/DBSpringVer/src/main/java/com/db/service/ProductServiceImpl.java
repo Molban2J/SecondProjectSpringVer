@@ -138,4 +138,19 @@ public class ProductServiceImpl implements ProductService {
 		return productmapper.getAuctionList();
 	}
 
+	@Override
+	public AuctionVO getAuctionDetail(int num) throws Exception {
+		return productmapper.getAuctionDetail(num);
+	}
+
+	@Override
+	public void dealAuction(AuctionVO auVo) throws Exception {
+		productmapper.dealAuction(auVo);
+	}
+
+	@Override
+	public void endAuction(int num) throws Exception {
+		productmapper.endAuction(num);
+	}
+
 }

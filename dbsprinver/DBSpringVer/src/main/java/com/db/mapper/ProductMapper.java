@@ -70,6 +70,14 @@ public interface ProductMapper {
 	//옥션 목록 가져오기
 	public ArrayList<AuctionVO> getAuctionList();
 	
+	//옥션 상세 보기
+	public AuctionVO getAuctionDetail(int num);
+	
+	//경매 입찰
+	public void dealAuction(AuctionVO auVo);
+	
+	//기간이 지난 경매(onOff설정)
+	public void endAuction(int num);
 	
 
 }

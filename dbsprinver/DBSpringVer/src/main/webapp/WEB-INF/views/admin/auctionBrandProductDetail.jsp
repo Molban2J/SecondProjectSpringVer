@@ -76,10 +76,9 @@
 
 
 				<form action="/admin/addAuction.do" method="post">
-					<input type="hidden" name="command" value="add_auction">
 					<input type="hidden" name="pName" value="${product.pname }">
 					<input type="hidden" name="bName" value="${product.bname }">
-					<input type="hidden" name="price" value="${product.price }">
+					<input type="hidden" name="price" value="0">
 					<input type="hidden" name="imgUrl" value="${product.imgUrl }">
 					<c:forEach var="size" items="${pSize }">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -109,7 +108,7 @@
 					<div class="d-flex align-items-center mb-4 pt-2">
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input" id="on"
-								name="onOff" value="1"
+								name="onOff" value="1" checked="checked"
 							>
 							<label class="custom-control-label" for="on">ON</label>
 						</div>
@@ -135,6 +134,7 @@
 		const dateObj = new Date(dateTimeInput.value); // 입력된 문자열값을 Date 객체로 변환
 		const endAt = dateObj.toISOString(); // Date 객체를 문자열로 변환
 		document.getElementById("dateTimeInput").value = endAt; // endtime 입력 컨트롤의 값으로 설정
+		
 		</script>
 </body>
 </html>

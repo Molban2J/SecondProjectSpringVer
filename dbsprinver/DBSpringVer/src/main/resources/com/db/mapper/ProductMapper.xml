@@ -239,9 +239,17 @@
 
 
 	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
-		select * from auction order by endTime
+		select * from auction order by endTime, onOff desc
 	</select>
-
-
+	
+	<select id="getAuctionDetail" resultType="com.db.model.AuctionVO">
+		select * from auction where num = #{num}
+	</select>
+	<update id="dealAuction">
+		update auction set price=#{price}, userId=#{userId} where num = #{num}
+	</update>
+	<update id="endAuction">
+		update auction set onOff=0 where num = #{num}
+	</update>
 
 </mapper>

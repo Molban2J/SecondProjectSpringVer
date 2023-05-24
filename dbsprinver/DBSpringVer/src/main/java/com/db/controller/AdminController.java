@@ -70,9 +70,8 @@ public class AdminController {
 
 	@PostMapping("addAuction.do")
 	public String addAuctionPOST(AuctionVO vo, RedirectAttributes rttr, String dateTimeInput) throws Exception {
-//		LocalDateTime dateTime = LocalDateTime.parse(end, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-//		Timestamp endTime = Timestamp.valueOf(dateTime);
-//		vo.setEndTime(endTime);
+
+		vo.setPrice(vo.getStartPrice());
 		Timestamp endTime = Timestamp.valueOf(dateTimeInput.replace("T", " ").concat(":00")); 
 		vo.setEndTime(endTime);
 		
