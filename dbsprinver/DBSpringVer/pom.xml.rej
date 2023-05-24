@@ -1,0 +1,11 @@
+diff a/dbsprinver/DBSpringVer/pom.xml b/dbsprinver/DBSpringVer/pom.xml	(rejected hunks)
+@@ -116,9 +116,6 @@
+ 		</dependency>
+ 
+ 		<!-- Servlet -->
+-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
+-			<version>2.5</version> <scope>provided</scope> </dependency> -->
+-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+ 		<dependency>
+ 			<groupId>javax.servlet</groupId>
+ 			<artifactId>javax.servlet-api</artifactId>

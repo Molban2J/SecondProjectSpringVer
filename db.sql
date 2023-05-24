@@ -244,7 +244,7 @@ select * from order_detail;
 select * from order_view;
 desc order_detail;
 
-
+update shopuser set grade = 1 where userid='admin';
 
 /*insert*/  /*0419 1000*/
 insert into shopuser values('admin','$2a$10$oC0NmZtmTQmBZgKDeXZwFe/VFGb0KgupZl0e.637agg1MNeEdy5e6','관리자', '12345@gamil.com', '12345', '서울특별시 인사동 12길 ', '대일빌딩 , 하이미디어 15층, 16호 ', '01012344321', '1', '1', '0','2023/04/13');
@@ -281,7 +281,7 @@ BEGIN
   :new.grade := new_grade;
 END;
 /
-
+delete brand where bname = 'test';
 
 
 

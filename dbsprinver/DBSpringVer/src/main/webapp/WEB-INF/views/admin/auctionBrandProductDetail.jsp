@@ -76,21 +76,20 @@
 
 
 				<form action="/admin/addAuction.do" method="post">
-					<input type="hidden" name="command" value="add_auction">
 					<input type="hidden" name="pName" value="${product.pname }">
 					<input type="hidden" name="bName" value="${product.bname }">
-					<input type="hidden" name="price" value="${product.price }">
+					<input type="hidden" name="price" value="0">
 					<input type="hidden" name="imgUrl" value="${product.imgUrl }">
 					<c:forEach var="size" items="${pSize }">
 						<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="${size.psize }"
-							name="psize" value="${size.psize }"
+							name="pSize" value="${size.psize }"
 						>
 						<label class="custom-control-label" for="${size.psize }">${size.psize }</label>
 					</div>
 					</c:forEach>
 					
-					<input type="hidden" class="form-control"  name="userid" value="${user }">
+					<input type="hidden" class="form-control"  name="userId" value="${user.userid }">
 					<div class="d-flex mb-3" style="margin-top: 40px;">
 						<p class="text-dark font-weight-medium mb-0 mr-3">시작가:</p>
 					</div>
@@ -99,7 +98,7 @@
 					</div>
 					<div class="d-flex mb-3" style="margin-top: 40px;">
 						<p class="text-dark font-weight-medium mb-0 mr-3">기간:</p>
-						<input type="date" class="form-control" name="endTime" style="width: 300px;">
+						<input type="datetime-local" class="form-control" id="dateTimeInput" name="dateTimeInput" style="width: 300px;" >
 					</div>
 					
 					<div class="d-flex mb-3" style="margin-top: 40px;">
@@ -109,7 +108,7 @@
 					<div class="d-flex align-items-center mb-4 pt-2">
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input" id="on"
-								name="onOff" value="1"
+								name="onOff" value="1" checked="checked"
 							>
 							<label class="custom-control-label" for="on">ON</label>
 						</div>
@@ -128,5 +127,14 @@
 		<!-- Shop Detail End -->
 
 		<jsp:include page="../footer.jsp"></jsp:include>
+		
+		<script type="text/javascript">
+		
+		const dateTimeInput = document.getElementById("dateTimeInput");
+		const dateObj = new Date(dateTimeInput.value); // 입력된 문자열값을 Date 객체로 변환
+		const endAt = dateObj.toISOString(); // Date 객체를 문자열로 변환
+		document.getElementById("dateTimeInput").value = endAt; // endtime 입력 컨트롤의 값으로 설정
+		
+		</script>
 </body>
 </html>

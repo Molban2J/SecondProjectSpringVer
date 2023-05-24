@@ -10,19 +10,16 @@
 <style>
 .list {
 	width: 70%;
-	border: solid 1px gray;
-}
-
-.pw th {
-	width: 80px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 80px;
+	border: none;
+	table-layout: auto;
+	
 }
 
 th {
 	border: solid 1px gray;
 	border-collapse: collapse;
+	min-width: 100px;
+	text-align: center;
 }
 
 td {
@@ -33,6 +30,33 @@ td {
 	overflow: hidden; /* 넘치는 부분 감추기 */
 	text-overflow: ellipsis;
 	width: 100px; /* 생략 부호(...)로 대체 */
+	text-align: center;
+}
+
+.hiddentd{
+	width: 100px;
+	border: none;
+	text-align: center;
+}
+
+.hiddenbutton{
+	display: none;
+}
+
+.button:hover{
+	background-color: pink;
+	font-weight: 600;
+}
+
+tr:hover .hiddenbutton{
+	display: block;
+}
+tr:hover .hiddentd{
+	background-color: white;
+}
+
+.point{
+	width:10px;
 }
 </style>
 </head>
@@ -53,9 +77,9 @@ td {
 				<th>우편번호</th>
 				<th>전화번호</th>
 				<th>등급</th>
-				<th>포인트</th>
+				<th style="width: 50px;">포인트</th>
 				<th>가입일자</th>
-				<td style="width: 70px; border: none;"></td>
+				<td style="border: none; color: white;">b u t t o n</td>
 			</tr>
 			<c:forEach var="shopUser" items="${shopUser }">
 				<tr class="button">
@@ -100,7 +124,7 @@ td {
 					<td>${shopUser.point }</td>
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
 				
-					<td class="hiddenbutton"><input type="button" class="btn-primary px-3" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${shopUser.userid }')"> <input type="button" class="btn-primary px-3 delete" value="삭제"
+					<td class="hiddentd"><input type="button" class="btn-primary px-3 hiddenbutton" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${shopUser.userid }')"> <input type="button" class="btn-primary px-3 delete hiddenbutton" value="삭제"
 						onclick="location.href='/admin/userDelete?shopUserid=${shopUser.userid }'"></td>
 						 
 						 

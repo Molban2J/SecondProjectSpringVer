@@ -1,6 +1,7 @@
 package com.db.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
+=======
+import org.springframework.ui.Model;
+>>>>>>> Jongmin
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.db.model.AuctionVO;
 import com.db.model.CartVO;
 import com.db.model.CouponVO;
 import com.db.model.OrderVO;
@@ -252,5 +258,51 @@ public class ProductController {
 
 		return "/product/orderList";
 	}
+<<<<<<< HEAD
+=======
+	
+	//옥션 리스트 페이지
+	@GetMapping("/auctionView")
+	public void auctionViewGET(Model model) throws Exception {
+		System.out.println("auctionView 접속");
+		ArrayList<AuctionVO> auVo = productService.getAuctionList();
+		for(AuctionVO vo : auVo) {
+			if(vo.getEndTime().before(new Date())) {
+				productService.endAuction(vo.getNum());
+			}
+		}
+		model.addAttribute("AuctionList",auVo);
+	}
+	
+	//옥션 상세 페이지
+	@GetMapping("auctionDetail")
+	public void auctionDetailGET(int num,String pName,Model model) throws Exception{
+		System.out.println("auctionDetail 접속");
+		AuctionVO auVo = productService.getAuctionDetail(num);
+		ProductVO pVo = productService.productDetailByPname(pName);
+//		if(auVo.getEndTime().before(new Date())) {	
+//			productService.auctionComplete(num);
+//		}
+		
+		model.addAttribute("originProduct",pVo);
+		model.addAttribute("auction",auVo);
+	}
+	
+	@PostMapping("dealAuction.do")
+	public String auctionEnrollPOST(AuctionVO auVo,String originProduct ,Model model) throws Exception{
+		System.out.println("dealAuction.do 실행");
+		System.out.println("dealAuction auVo: "+auVo);
+		productService.dealAuction(auVo);
+		model.addAttribute("pName", originProduct);
+		model.addAttribute("num", auVo.getNum());
+		return "redirect:/product/auctionDetail";
+	}
+	
+	@PostMapping("expiredAuction.do")
+	public void expiredAuctionPOST(int num) throws Exception {
+		System.out.println("expiredAuction.do 실행");
+		productService.endAuction(num);
+	}
+>>>>>>> Jongmin
 
 }

@@ -3,17 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.db.mapper.AdminMapper">
-<insert id = "insertAuction">
-	insert into auction (userId, bName, pName, price, startPrice, endTime, onOff, pSize, imgUrl,num) 
-	values(#{userId}, #{bName}, #{pName}, #{price}, #{startPrice}, #{endTime}, 1, #{pSize}, #{imgUrl},auction_seq.nextval)
-</insert>
-<select id="getUserList" resultType="com.db.model.UserVO">
-	select * from shopuser
-</select>
-<delete id="deleteUser">
-	delete shopuser where userid = #{userid}
-</delete>
-<select id="getUser" resultType="com.db.model.UserVO">
-	select * from shopuser where userid = #{userid}
-</select>
+	<insert id="insertAuction">
+		insert into auction (userId, bName, pName, price,
+		startPrice, endTime,
+		onOff, pSize, imgUrl,num)
+		values(#{userId},
+		#{bName}, #{pName}, #{price}, #{startPrice}, #{endTime}, 1, #{pSize},
+		#{imgUrl},auction_seq.nextval)
+	</insert>
+	<select id="getUserList" resultType="com.db.model.UserVO">
+		select * from shopuser
+	</select>
+	<delete id="deleteUser">
+		delete shopuser where userid = #{userid}
+	</delete>
+	<select id="getUser" resultType="com.db.model.UserVO">
+		select * from shopuser where
+		userid = #{userid}
+	</select>
+
+	<update id="adminUserUpdate">
+
+		update shopuser set pass = #{pass}, name = #{name},
+		email = #{email}, point = #{point}, grade=#{grade},
+		address1 =
+		#{address1}, address2 = #{address2},
+		address3 = #{address3}, phone =
+		#{phone}, gender = #{gender}
+		where
+		userid = #{userid}
+
+	</update>
+	
+	<insert id="brandEnroll">
+		insert into brand values(#{bname}, #{imgurl})
+	</insert>
+	
+	<delete id="deleteBrand">
+		delete from brand where bname = #{bname}
+	</delete>
 </mapper>
