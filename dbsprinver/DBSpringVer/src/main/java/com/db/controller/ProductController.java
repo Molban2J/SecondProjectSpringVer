@@ -6,17 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +23,6 @@ import com.db.model.CartVO;
 import com.db.model.CouponVO;
 import com.db.model.OrderVO;
 import com.db.model.ProductVO;
-import com.db.model.UserVO;
 import com.db.service.ProductService;
 import com.db.service.UserService;
 
@@ -39,7 +34,7 @@ public class ProductController {
 
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	UserService userService;
 
@@ -218,7 +213,7 @@ public class ProductController {
 
 		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
 		request.setAttribute("plist", plist);
-		
+
 		ArrayList<CouponVO> couplist = userService.getMyCoupon(userid); // 쿠폰 정보 불러오기
 		request.setAttribute("couplist", couplist);
 		return "/product/checkOut";
@@ -226,19 +221,36 @@ public class ProductController {
 
 	// 결제완료
 	@PostMapping("/purchased")
-	public String purchasedPOST(Integer totalprice, Integer cnum, String userid, OrderVO order, HttpServletRequest request) throws Exception {
-	    productService.addOrders(userid);
-	    String[] pnames = request.getParameterValues("pname");
+	public String purchasedPOST(@Param("cnum") Integer cnum, @Param("cartnum") int cartnum,
+			@Param("userid") String userid, @Param("totalprice") int totalprice, @Param("name") String name,
+			@Param("email") String email, @Param("phone") String phone, @Param("address1") String address1,
+			@Param("address2") String address2, @Param("address3") String address3, HttpServletRequest request)
+			throws Exception {
 
-	    for (String pname : pnames) {
-	        System.out.println(pname);
-	    }
-	    System.out.println("쿠폰번호 : " + (cnum != null ? cnum : "없음")
-	                     + " + 토탈가격 : " + totalprice
-	                     + "유저아이디 : " + userid );
+		if (cnum != null) {
+			productService.useCoupon(cnum);
+		}
+		int orderNumber = productService.getLatestOrderNumber(userid);// orderNumber를 가져옴
 
-	    return null;
+		ArrayList<CartVO> cartlist = productService.getCartList(userid);
+		for (CartVO cart : cartlist) {
+			productService.addOrderDetail(cart, totalprice, orderNumber, name, phone, email, address1, address2,
+					address3); // order_detail table에 저장
+			// order_detail table 에 추가
+			productService.cartResultChange(cartnum, cart);
+			// 주문완료한 장바구니 result -> 0 으로 변경
+
+		}
+
+		ArrayList<ProductVO> plist = productService.getAllProduct();
+		request.setAttribute("plist", plist); // 상품정보 불러오고 저장
+
+		ArrayList<OrderVO> olist = productService.getOrderList(orderNumber);
+		request.setAttribute("olist", olist); // 마지막 주문정보를 불러오고 저장
+
+		productService.increaseUserPoint(userid, totalprice); // 주문완료후 포인트 지급
+
+		return "/product/orderList";
 	}
-	
 
 }

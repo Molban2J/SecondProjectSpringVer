@@ -3,12 +3,12 @@ package com.db.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Param;
 
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
+import com.db.model.OrderVO;
 import com.db.model.ProductVO;
-import com.db.model.UserVO;
 
 public interface ProductService {
 
@@ -62,8 +62,26 @@ public interface ProductService {
 
 	// 장바구니 상품 삭제
 	public int cartDelete(int cartnum) throws Exception;
-	
-	// 결제 정보 추가(orders table)
-	public CartVO addOrders(String userid) throws Exception;
 
+	// 결제 정보 추가(orders table)
+	public void addOrders(String userid) throws Exception;
+
+	// order detail 테이블에 추가
+	public void addOrderDetail(CartVO cart, int totalprice, int ordernumber, String name, String phone, String email,
+			String address1, String address2, String address3) throws Exception;
+
+	// orders table에 추가된 ordernumber 값 가져오기
+	public int getLatestOrderNumber(String userid) throws Exception;
+
+	// order_view 에서 정보 가져오기
+	public ArrayList<OrderVO> getOrderList(int orderNumber) throws Exception;
+
+	// 주문완료한 장바구니 result ->0 으로 변경
+	public int cartResultChange(@Param("cartnum") int cartnum, @Param("cart") CartVO cart) throws Exception;
+
+	// 사용한 쿠폰 result -> 0 으로 변경
+	public int useCoupon(int cnum) throws Exception;
+
+	// 주문완료 후 포인트 지급
+	public void increaseUserPoint(String userid, int totalprice) throws Exception;
 }

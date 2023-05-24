@@ -8,10 +8,6 @@
 <meta charset="utf-8">
 <title>DIIB</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="Free HTML Templates" name="keywords">
-<meta content="Free HTML Templates" name="description">
-<!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -105,8 +101,9 @@
 							<div class="nav-item dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">게시판</a>
 								<div class="dropdown-menu rounded-0 m-0">
-									<a href="DBServlet?command=free_board_list" class="dropdown-item">자유게시판</a>
-									<a href="DBServlet?command=qna_board_list" class="dropdown-item">Q&A게시판</a>
+									<a href="/board/list?pageNum=1&amount=10&category=F&keyword=&type=" class="dropdown-item">자유 게시판</a>
+									<a href="/board/list?pageNum=1&amount=10&category=Q&keyword=&type=" class="dropdown-item">질문 게시판</a>
+									<a href="/board/list?pageNum=1&amount=10&category=S&keyword=&type=" class="dropdown-item">공지사항</a>
 								</div>
 							</div>
 							<a href="#" class="nav-item nav-link">Auction</a>
@@ -172,8 +169,8 @@
 											</div>
 											<hr>
 											<a href="/user/mypagechk" class="dropdown-item">내 정보 수정</a>
-											<a href="#" class="dropdown-item">나의 작성 글</a>
-											<a href="#" class="dropdown-item">나의 주문내역</a>
+											<a href="/user/myWriting?pageNum=1&amount=10&type=M&keyword=${user.userid }" class="dropdown-item">나의 작성 글</a>
+											<a href="/user/myPurchased?userid=${user.userid }" class="dropdown-item">나의 주문내역</a>
 											<a href="/user/myCoupon?userid=${user.userid }" class="dropdown-item">보유 쿠폰</a>
 											<hr>
 											<div style="text-align: center;">

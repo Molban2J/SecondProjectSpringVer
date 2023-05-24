@@ -1,27 +1,30 @@
   
-drop sequence freeboard_seq; 
+drop sequence free_seq; 
+drop sequence freply_seq;
 drop sequence cart_seq;
 drop sequence product_seq;
-drop sequence qnaboard_seq;
 drop sequence coupon_seq;
 drop sequence orders_seq;
 drop sequence order_detail_seq;
 drop sequence auction_seq;
 
-create sequence freeboard_seq start with 1 increment by 1;
+drop index idx_free_board_num_desc;
+
+create sequence free_seq start with 1 increment by 1;
+create sequence freply_seq start with 1 increment by 1;
 create sequence cart_seq start with 1 increment by 1;
 create sequence product_seq start with 1 increment by 1;
-create sequence qnaboard_seq start with 1 increment by 1;
 create sequence coupon_seq start with 1 increment by 1;
 create sequence orders_seq start with 1 increment by 1;
 create sequence order_detail_seq start with 1 increment by 1;
 create sequence auction_seq start with 1 increment by 1;
 
-drop table freeboard;
-drop table purchased;
+DROP VIEW order_view;
+
+drop table fboard_reply;
+drop table free_board;
 drop table cart;
 drop table auction;
-drop table qnaboard;
 drop table coupon;
 drop table order_detail;
 drop table orders;
@@ -29,7 +32,7 @@ drop table shopuser;
 drop table product;
 drop table brand;
 
-DROP VIEW order_view;
+
 
 
 /*shopuser*/
@@ -37,7 +40,7 @@ CREATE TABLE shopuser (
   userid VARCHAR2(20) PRIMARY KEY,
   pass VARCHAR2(200), /*0419 1000*/
   name VARCHAR2(30),
-  email VARCHAR2(200), /*0419 1000*/
+  email VARCHAR2(200), 
   address1 VARCHAR2(100),
   address2 VARCHAR2(100),
   address3 VARCHAR2(100),
@@ -48,40 +51,29 @@ CREATE TABLE shopuser (
   enter DATE DEFAULT SYSDATE
 );
 
-/*freeboard*/
-CREATE TABLE freeboard (
-num NUMBER(5) PRIMARY KEY, /*sequence*/
-userid VARCHAR2(20),/*fk - shopuser userid*/
+CREATE TABLE free_board (
+num NUMBER(5) PRIMARY KEY,
+userid VARCHAR2(20),
 title VARCHAR2(100),
 content VARCHAR2(4000),
+category VARCHAR2(100),
 writedate DATE DEFAULT SYSDATE,
-imgurl VARCHAR2(300),
 readcount NUMBER(5) DEFAULT 0
 );
+CREATE INDEX idx_free_board_num_desc ON free_board (num DESC);
 
-/*purchased*/
-CREATE TABLE purchased(
-orderNum varchar2(10), /*squence*/
-userid VARCHAR2(20) not null,/*fk - shopuser userid*/			     	    
-bName VARCHAR2(20),
-pName VARCHAR2(20),
-pSize VARCHAR2(10),
-price NUMBER(10) not null,
-purchasedPrice NUMBER(10),
-imgUrl varchar2(300),
-orderdate DATE DEFAULT SYSDATE,
-quantity NUMBER(10),
-pNum number(4), /*fk - product num, 0414 UPDATE*/
-recipName varchar2(20),  /*       */
-recipPhone varchar2(20),  /*          ?*/
-recipZipcode varchar2(10),   /*      ?*/
-recipAddr1 varchar2(100),   /* ? */
-recipAddr2 varchar2(100),   /*  */
-memo varchar2(500),   /*  ? */
-discountRate number(10),   /*   η */
-deliveryFee number(10),   /*   ? */
-payMethod varchar(50),   /*      */
-status varchar2(10)  /*   ?      */
+
+
+CREATE TABLE fboard_reply (
+  rno     NUMBER(10) NOT NULL PRIMARY KEY,
+  num     NUMBER(10) NOT NULL,
+  writer  VARCHAR2(30) NOT NULL,
+  content CLOB NOT NULL,
+  regDate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+ CONSTRAINT FK_FBOARD_REPLY_NUM
+  FOREIGN KEY (num)
+  REFERENCES free_board(num)
+  ON DELETE CASCADE
 );
 
 /*cart*/
@@ -136,16 +128,7 @@ bName VARCHAR2(20) primary key,
 imgUrl VARCHAR2(300)
 );
 
-/*qna 2023/04/14*/
-CREATE TABLE qnaboard (
-num NUMBER(5) PRIMARY KEY,
-userid VARCHAR2(20),
-title VARCHAR2(100),
-content VARCHAR2(4000),
-writedate DATE DEFAULT SYSDATE,
-imgurl VARCHAR2(300),
-readcount NUMBER(5) DEFAULT 0
-);
+
 
 /* coupon */
 CREATE TABLE coupon (
@@ -175,8 +158,12 @@ CREATE TABLE order_detail (
   price NUMBER(10) default 0 not null,
   totalPrice NUMBER(10),
   pSize VARCHAR2(10),
-  imgUrl varchar2(300),
-  pName VARCHAR2(200) not null,
+  name VARCHAR2(30),
+  email VARCHAR2(200), 
+  address1 VARCHAR2(100),
+  address2 VARCHAR2(100),
+  address3 VARCHAR2(100),
+  phone VARCHAR2(20),
   result CHAR(1) DEFAULT 1 /*1 주문 확인 중 2 주문 처리 중*/
 );
 
@@ -189,6 +176,14 @@ SELECT
   order_detail.orderDetailNumber,
   order_detail.num,
   order_detail.quantity,
+  order_detail.totalprice,
+  order_detail.price,
+  order_detail.psize,
+  order_detail.name,
+  order_detail.phone,
+  order_detail.address1,
+  order_detail.address2,
+  order_detail.address3,
   order_detail.result
 FROM
   orders
@@ -217,9 +212,6 @@ ALTER TABLE product
 ADD CONSTRAINT product_fk_brand
 FOREIGN KEY (bName) REFERENCES brand (bName) ON DELETE CASCADE;
 
-ALTER TABLE qnaboard 
-ADD CONSTRAINT qnaboard_fk_user
-FOREIGN KEY (userid) REFERENCES shopuser (userid) ON DELETE CASCADE;
 
 ALTER TABLE cart 
 ADD CONSTRAINT cart_fk_user
@@ -228,18 +220,6 @@ FOREIGN KEY (userid) REFERENCES shopuser (userid) ON DELETE CASCADE;
 ALTER TABLE cart 
 ADD CONSTRAINT cart_fk_product
 FOREIGN KEY (num) REFERENCES product (num) ON DELETE CASCADE;
-
-ALTER TABLE freeboard
-ADD CONSTRAINT freeboard_fk_user
-FOREIGN KEY (userid) REFERENCES shopuser (userid) ON DELETE CASCADE;
-
-ALTER TABLE purchased
-ADD CONSTRAINT purchased_fk_user
-FOREIGN KEY (userid) REFERENCES shopuser (userid) ON DELETE CASCADE;
-
-ALTER TABLE purchased 
-ADD CONSTRAINT purchased_fk_product
-FOREIGN KEY (pNum) REFERENCES product (num) ON DELETE CASCADE;
 
 ALTER TABLE auction 
 ADD CONSTRAINT auction_fk_user
@@ -253,7 +233,7 @@ WHERE userid = 'user';
 
 /*select*/
 select * from shopuser;
-select * from qnaboard;
+select * from free_board;
 select * from brand;
 select * from cart;
 select * from coupon;
@@ -261,6 +241,7 @@ select * from product;
 select * from auction;
 select * from orders;
 select * from order_detail;
+select * from order_view;
 desc order_detail;
 
 

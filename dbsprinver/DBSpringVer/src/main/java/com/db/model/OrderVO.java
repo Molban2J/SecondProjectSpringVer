@@ -17,7 +17,7 @@ public class OrderVO { // orders table + order_detail table
 	private String result;
 	private Timestamp indate;
 	private int totalprice;
-	private String imgurl;
-	private String pname;
+	private String name, email, address1,address2,address3,phone;
+
 
 }
