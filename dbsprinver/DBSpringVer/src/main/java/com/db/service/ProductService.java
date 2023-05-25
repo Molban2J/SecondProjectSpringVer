@@ -63,7 +63,6 @@ public interface ProductService {
 
 	// 장바구니 상품 삭제
 	public int cartDelete(int cartnum) throws Exception;
-<<<<<<< HEAD
 
 	// 결제 정보 추가(orders table)
 	public void addOrders(String userid) throws Exception;
@@ -86,10 +85,6 @@ public interface ProductService {
 
 	// 주문완료 후 포인트 지급
 	public void increaseUserPoint(String userid, int totalprice) throws Exception;
-=======
-
-	// 결제 정보 추가(orders table)
-	public CartVO addOrders(String userid) throws Exception;
 
 	// 상품 상세(제품 이름으로 검색
 	public ProductVO productDetailByPname(String pname) throws Exception;
@@ -106,5 +101,4 @@ public interface ProductService {
 	// 기간이 지난 경매(onOff설정)
 	public void endAuction(int num) throws Exception;
 
->>>>>>> Jongmin
 }

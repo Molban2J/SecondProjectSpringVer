@@ -255,22 +255,21 @@
 		MAX(orderNumber) FROM orders WHERE userid=#{userid}
 	</select>
 
-<<<<<<< HEAD
+
 	<!-- order_view 에서 정보가져오기 -->
 	<select id="getOrderList" resultType="com.db.model.OrderVO">
 		select * from order_view
 		where ordernumber = #{ordernumber}
-=======
-	    
+	</select>
     <!-- 제품 이름으로 제품상세 불러오기 -->
     <select id="productDetailByPname" resultType="com.db.model.ProductVO">
         select * from product where pname = #{pname} and rownum = 1
     </select>
->>>>>>> Jongmin
 
-	</select>
 
-<<<<<<< HEAD
+	
+
+
 	<!-- 주문완료한 cart result 0으로 변경 -->
 	<update id="cartResultChange">
 
@@ -289,9 +288,8 @@
 		WHERE userid = #{userid}
 	</update>
 
-=======
 	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
-		select * from auction order by endTime, onOff desc
+		select * from auction order by onOff desc ,endTime
 	</select>
 	
 	<select id="getAuctionDetail" resultType="com.db.model.AuctionVO">
@@ -303,6 +301,5 @@
 	<update id="endAuction">
 		update auction set onOff=0 where num = #{num}
 	</update>
->>>>>>> Jongmin
 
 </mapper>

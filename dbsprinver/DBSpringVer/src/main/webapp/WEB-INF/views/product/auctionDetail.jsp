@@ -77,7 +77,8 @@
 						</c:otherwise>
 					</c:choose>
 					<div class="d-flex mb-3" style="margin-top: 40px;">
-						<h3 class="font-weight-semi-bold">현재가 &#8361;${auction.price }</h3>
+						<h3 class="font-weight-semi-bold">현재가 &#8361;</h3>
+						<span style="font-size: 1.8em; color: black; margin-left: 30px; transform: translate(-8px, -3px);" id="cPrice">${auction.price }</span>
 					</div>
 					<c:if test="${auction.onOff== 1 }">
 						<div style="display: flex;">
@@ -90,9 +91,11 @@
 						<input type="hidden" name="num" value="${auction.num }">
 						<input type="hidden" name="onOff" value="${auction.onOff }">
 						<input type="hidden" name="originProduct" value="${originProduct.pname }">
+						<!-- 입력 가격과 현재 가격을 비교를 위한 input -->
+						<input type="hidden" name="currentPrice" id="currentPrice" value="${auction.price }">
 						<c:choose>
 							<c:when test="${auction.onOff==0 }">
-								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='DBServlet?command=auction_view'">
+								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='/product/auctionView'">
 							</c:when>
 							<c:otherwise>
 								<c:if test="${not empty user.userid}">
@@ -157,7 +160,7 @@
 			document.getElementById("countdown").innerHTML = "기간이 만료된 경매입니다.";
 			
 		}
-	}, 50);
+	}, 100);
 	} else{
 		document.getElementById("countdown").innerHTML = "기간이 만료된 경매입니다.";
 	}
@@ -192,6 +195,39 @@
 		  };
 		  xhr.send(formData);
 		}
+	 if(document.frm.onOff.value != 0){
+	 $(document).ready(function() {
+		  fetchPrice(); // 페이지 로드 시 가격 가져오기
+
+		  // 일정 간격마다 가격을 업데이트하기 위해 fetchPrice() 함수를 호출합니다.
+		  setInterval(fetchPrice, 1000); // 1초마다 업데이트
+		});
+	 }
+
+		function fetchPrice() {
+			var numValue = ${auction.num};
+			
+		  $.ajax({
+		    url: '/product/getPrice',
+		    type: 'post', // POST 방식으로 변경
+		    data: { num: numValue }, // num 값을 매개변수로 전달
+		    success: function(price) {
+		    	console.log("가격:", price);
+		      updatePrice(price);
+		    },
+		    error: function(xhr, status, error) {
+		      console.error('가격을 가져오는 동안 오류가 발생했습니다:', error);
+		    }
+		  });
+		}
+
+		function updatePrice(price) {
+			const priceEl = document.getElementById('cPrice');
+			priceEl.innerText = price; // span 요소인 경우
+			const curruntPrice = document.getElementById('currentPrice');
+			currentPrice.value = price;
+		}
+
 </script>
 </body>
 </html>
