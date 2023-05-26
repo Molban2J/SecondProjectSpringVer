@@ -13,9 +13,9 @@
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-			<h1 class="font-weight-semi-bold text-uppercase mb-3">Purchased List</h1>
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">OrderCheck Process</h1>
 			<div class="d-inline-flex">
-				<p class="m-0">주문내역 상세 확인</p>
+				<p class="m-0">신규 주문 처리</p>
 			</div>
 		</div>
 	</div>
@@ -66,7 +66,7 @@
 						<c:if test="${olist.num eq plist.num }">
 							<tr>
 								<td class="align-middle">${olist.num}</td>
-								<td class="align-middle"><a href='/product/productDetail?num=<c:out value="${plist.num }"/>&pname=${plist.pname}'>${plist.pname}</a></td>
+								<td class="align-middle">${plist.pname}</td>
 								<td class="align-middle">${olist.psize}</td>
 								<td class="align-middle">${olist.quantity }</td>
 								<td class="align-middle"><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${olist.price * olist.quantity }" currencySymbol="₩" /></td>
@@ -98,33 +98,33 @@
 				<tr>
 		</table>
 		<div class="card-footer border-secondary bg-transparent" align="center">
-			<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="withdrawOrder('${ordernumber}', '${result}')">Withdraw Order</button>
-			<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="location.href='/user/myPurchased?userid=${user.userid }'">Purchased List</button>
+			<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="checkOrder('${ordernumber}', '${result}')">Check Order</button>
+			<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="location.href='/admin/sales_OrderManagement'">Sales&Order List</button>
 		</div>
 	</div>
 	<hr>
 	<script>
-		function withdrawOrder(ordernumber, orderResult) {
+		function checkOrder(ordernumber, orderResult) {
 			if (orderResult === "1") {
-				if (confirm("주문을 취소하시겠습니까?")) {
+				if (confirm("주문처리 하시겠습니까?")) {
 					$.ajax({
-						url : `/user/withdrawOrder?ordernumber=${ordernumber}`,
+						url : `/admin/checkOrder?ordernumber=${ordernumber}`,
 						type : 'GET',
 						success : function(data) {
 							if (data === "Success") {
-								alert("주문이 성공적으로 취소되었습니다.");
+								alert("주문이 처리 되었습니다.");
 								location.reload(); // 주문 상태를 업데이트하기 위해 페이지를 다시 로드합니다.
 							} else {
-								alert("주문 취소 중 문제가 발생했습니다.");
+								alert("주문 처리 중 문제가 발생했습니다.");
 							}
 						},
 						error : function(err) {
-							alert("주문 취소 요청이 실패했습니다.");
+							alert("주문 배송처리 요청이 실패했습니다.");
 						}
 					});
 				}
 			} else {
-				alert("취소 요청할 수 없습니다.");
+				alert("처리 요청할 수 없습니다.");
 			}
 		}
 	</script>

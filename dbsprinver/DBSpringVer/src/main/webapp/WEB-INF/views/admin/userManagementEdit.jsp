@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/shopuserTheme.css">
 <script type="text/javascript" src="..resources/js/shopuser.js"></script>
  -->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -18,13 +19,12 @@
 			<table class="list">
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="userid" value="${shopUser.userid }" readonly="readonly"></td>
+					<td><input name="userid" value="${shopUser.userid }" readonly="readonly"></td>
 					<th>비밀번호</th>
 					<td><input type="text" name="pass" value="${shopUser.pass }" readonly="readonly"></td>
 					<th>이름</th>
 					<td><input type="text" name="name" value="${shopUser.name }" required="required"></td>
 				</tr>
-
 				<tr>
 					<th>성별</th>
 					<c:choose>
@@ -35,7 +35,6 @@
 							<td><input type="radio" name="gender" value="1"> 남자 <input type="radio" name="gender" value="2" checked="checked"> 여자</td>
 						</c:otherwise>
 					</c:choose>
-
 					<th>이메일</th>
 					<td><input type="email" name="email" value="${shopUser.email }"></td>
 					<th>등급</th>
@@ -108,9 +107,8 @@
 					<th>가입일자</th>
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
 				</tr>
-
 			</table>
-			<input type="submit" value="수정">
+			<input class="modify" value="수정" type="submit">
 		</form>
 	</div>
 </body>

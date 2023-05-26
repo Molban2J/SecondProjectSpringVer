@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.mapper.ProductMapper;
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.OrderVO;
@@ -139,7 +140,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getLatestOrderNumber(String userid) throws Exception {
 		productmapper.addOrders(userid);
-		// 새로 생성된 주문 번호(orderNumber)를 반환합니다.
+		// orders 테이블에 입력후 새로 생성된 주문 번호(ordernumber)를 반환함.
 		return productmapper.getLatestOrderNumber(userid);
 	}
 
@@ -168,6 +169,31 @@ public class ProductServiceImpl implements ProductService {
 	    params.put("totalprice", totalprice);
 	    
 	    productmapper.increaseUserPoint(params);
+	}
+
+    @Override
+    public ProductVO productDetailByPname(String pname) throws Exception {
+        return productmapper.productDetailByPname(pname);
+    }
+
+	@Override
+	public ArrayList<AuctionVO> getAuctionList() throws Exception {
+		return productmapper.getAuctionList();
+	}
+
+	@Override
+	public AuctionVO getAuctionDetail(int num) throws Exception {
+		return productmapper.getAuctionDetail(num);
+	}
+
+	@Override
+	public void dealAuction(AuctionVO auVo) throws Exception {
+		productmapper.dealAuction(auVo);
+	}
+
+	@Override
+	public void endAuction(int num) throws Exception {
+		productmapper.endAuction(num);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.OrderVO;
@@ -84,4 +85,20 @@ public interface ProductService {
 
 	// 주문완료 후 포인트 지급
 	public void increaseUserPoint(String userid, int totalprice) throws Exception;
+
+	// 상품 상세(제품 이름으로 검색
+	public ProductVO productDetailByPname(String pname) throws Exception;
+
+	// 옥션 목록 가져오기
+	public ArrayList<AuctionVO> getAuctionList() throws Exception;
+
+	// 옥션 상세 보기
+	public AuctionVO getAuctionDetail(int num) throws Exception;
+
+	// 경매 입찰
+	public void dealAuction(AuctionVO auVo) throws Exception;
+
+	// 기간이 지난 경매(onOff설정)
+	public void endAuction(int num) throws Exception;
+
 }

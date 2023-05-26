@@ -1,6 +1,7 @@
 package com.db.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.db.model.AuctionVO;
 import com.db.model.CartVO;
 import com.db.model.CouponVO;
 import com.db.model.OrderVO;
@@ -228,7 +231,7 @@ public class ProductController {
 			throws Exception {
 
 		if (cnum != null) {
-			productService.useCoupon(cnum);
+			productService.useCoupon(cnum); // 쿠폰 적용후 쿠폰 result값 변경
 		}
 		int orderNumber = productService.getLatestOrderNumber(userid);// orderNumber를 가져옴
 
@@ -236,7 +239,6 @@ public class ProductController {
 		for (CartVO cart : cartlist) {
 			productService.addOrderDetail(cart, totalprice, orderNumber, name, phone, email, address1, address2,
 					address3); // order_detail table에 저장
-			// order_detail table 에 추가
 			productService.cartResultChange(cartnum, cart);
 			// 주문완료한 장바구니 result -> 0 으로 변경
 
@@ -248,9 +250,52 @@ public class ProductController {
 		ArrayList<OrderVO> olist = productService.getOrderList(orderNumber);
 		request.setAttribute("olist", olist); // 마지막 주문정보를 불러오고 저장
 
-		productService.increaseUserPoint(userid, totalprice); // 주문완료후 포인트 지급
+		
 
 		return "/product/orderList";
 	}
+	//옥션 리스트 페이지
+		@GetMapping("/auctionView")
+		public void auctionViewGET(Model model) throws Exception {
+			System.out.println("auctionView 접속");
+			ArrayList<AuctionVO> auVo = productService.getAuctionList();
+			for(AuctionVO vo : auVo) {
+				if(vo.getEndTime().before(new Date())) {
+					productService.endAuction(vo.getNum());
+				}
+			}
+			model.addAttribute("AuctionList",auVo);
+		}
+		
+		//옥션 상세 페이지
+		@GetMapping("auctionDetail")
+		public void auctionDetailGET(int num,String pName,Model model) throws Exception{
+			System.out.println("auctionDetail 접속");
+			AuctionVO auVo = productService.getAuctionDetail(num);
+			ProductVO pVo = productService.productDetailByPname(pName);
+//			if(auVo.getEndTime().before(new Date())) {	
+//				productService.auctionComplete(num);
+//			}
+			
+			model.addAttribute("originProduct",pVo);
+			model.addAttribute("auction",auVo);
+		}
+		
+		@PostMapping("dealAuction.do")
+		public String auctionEnrollPOST(AuctionVO auVo,String originProduct ,Model model) throws Exception{
+			System.out.println("dealAuction.do 실행");
+			System.out.println("dealAuction auVo: "+auVo);
+			productService.dealAuction(auVo);
+			model.addAttribute("pName", originProduct);
+			model.addAttribute("num", auVo.getNum());
+			return "redirect:/product/auctionDetail";
+		}
+		
+		@PostMapping("expiredAuction.do")
+		public void expiredAuctionPOST(int num) throws Exception {
+			System.out.println("expiredAuction.do 실행");
+			productService.endAuction(num);
+		}
+
 
 }

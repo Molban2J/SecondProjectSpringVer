@@ -346,7 +346,7 @@ public class UserController {
 		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
 		request.setAttribute("plist", plist);
 
-		ArrayList<OrderVO> olist = userService.getMyPurchasedDetail(ordernumber);
+		ArrayList<OrderVO> olist = userService.getMyPurchasedDetail(ordernumber); //주문번호로 정보 가져오기
 		request.setAttribute("olist", olist);
 
 		return "/user/purchasedDetail";
@@ -356,12 +356,11 @@ public class UserController {
 	@GetMapping("/withdrawOrder")
 	@ResponseBody
 	public ResponseEntity<String> withdrawOrderGET(int ordernumber, HttpServletRequest request) {
-	  System.out.println("취소요청 주문번호" + ordernumber);
-	  userService.withdrawChangeResult(ordernumber);
+		System.out.println("취소요청 주문번호" + ordernumber);
+		userService.withdrawChangeResult(ordernumber);
 
-	  return ResponseEntity.ok("Success");
+		return ResponseEntity.ok("Success");
 	}
-
 
 	// 내가 쓴글 확인
 	@GetMapping("/myWriting")

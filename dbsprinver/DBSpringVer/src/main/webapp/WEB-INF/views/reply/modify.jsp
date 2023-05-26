@@ -32,25 +32,26 @@
 		</div>
 	</form>
 	<script>
-  function closeWindowAndRefreshParent(ev) {
-    ev.preventDefault();
-    fetch('/reply/modify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams(new FormData(ev.target))
-    }).then(function(response) {
-      if (response.ok) {
-        window.opener.location.reload();
-        window.close();
-      } else {
-        alert('댓글 수정 실패');
-      }
-    });
-  }
+		function closeWindowAndRefreshParent(ev) {
+			ev.preventDefault();
+			fetch('/reply/modify', {
+				method : 'POST',
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded'
+				},
+				body : new URLSearchParams(new FormData(ev.target))
+			}).then(function(response) {
+				if (response.ok) {
+					window.opener.location.reload();
+					window.close();
+				} else {
+					alert('댓글 수정 실패');
+				}
+			});
+		}
 
-  document.querySelector("form").addEventListener("submit", closeWindowAndRefreshParent);
-</script>
+		document.querySelector("form").addEventListener("submit",
+				closeWindowAndRefreshParent);
+	</script>
 </body>
 </html>

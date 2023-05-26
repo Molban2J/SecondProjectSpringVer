@@ -101,7 +101,7 @@
 		orderNumber=#{orderNumber}
 	</select>
 
-	<!-- 주문 취소한 orderdetail result 3으로 변경 -->
+	<!-- 주문 취소한 orderdetail result 4로 변경 -->
 	<update id="withdrawChangeResult">
 
 		update order_detail set result = 4 where

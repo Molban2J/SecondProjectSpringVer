@@ -4,12 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Auction</title>
+<jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
 	<hr>
-
-
 	<div class="mypage-container">
 		<div class="mypage-header"></div>
 		<div class="mypage-wrapper">
@@ -21,19 +19,13 @@
 				</div>
 				<div class="mypage-btns">
 					<div class="mypage-menu">
-
 						<button type="button" onclick="location.href='/admin/adminAuctionBrandList'">옥션 등록</button>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<hr>
 </body>
+<jsp:include page="../footer.jsp"></jsp:include>
 </html>

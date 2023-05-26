@@ -34,6 +34,14 @@
 					</tr>
 				</thead>
 				<tbody class="align-middle">
+				
+				<c:if test="${olist.size()==0}">
+								<tr>
+									<td class="align-middle" colspan="3">
+										<h3>주문내역이 없습니다.</h3>
+									</td>
+								</tr>
+							</c:if>
 					<c:set var="prev_orderNumber" value="-1" scope="page" />
 					<c:forEach var="olist" items="${olist }">
 						<c:choose>

@@ -4,38 +4,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/adminTheme.css">
+<jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
 	<hr>
-
-
 	<div class="mypage-container">
 		<div class="mypage-header"></div>
 		<div class="mypage-wrapper">
 			<div class="mypage-header">
 				<div class="mypage-userinfo">
 					<h4>
-						<strong>${loginUser.userid}</strong> 님
+						<strong>${user.userid}</strong> 님
 					</h4>
 				</div>
 				<div class="mypage-btns">
 					<div class="mypage-menu">
 						<ul>
-							<button type="button" onclick="location.href='admin/adminBrandList'">브랜드 관리</button>
-							<button type="button" onclick="location.href='DBServlet?command=product_list'">상품 관리</button>
+							<button type="button" onclick="location.href='adminBrandList'">브랜드 관리</button>
+							<button type="button" onclick="location.href='adminProductList'">상품 관리</button>
 						</ul>
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<hr>
 </body>
+<jsp:include page="../footer.jsp"></jsp:include>
 </html>
