@@ -113,10 +113,8 @@ body {
 									<a href="/board/list?pageNum=1&amount=10&category=S&keyword=&type=" class="dropdown-item">공지사항</a>
 								</div>
 							</div>
-<<<<<<< HEAD
-=======
+
 							<a href="/qna" class="nav-item nav-link">Q&A</a>
->>>>>>> kyudong
 							<a href="/product/auctionView" class="nav-item nav-link">Auction</a>
 							<a href="/product/saleList" class="nav-item nav-link">Sale</a>
 							<a href="/event" class="nav-item nav-link">Event</a>
@@ -139,17 +137,11 @@ body {
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
 									<div class="dropdown-menu rounded-0 m-0">
 										<a href="/admin/userManagementPage" class="dropdown-item">회원 관리</a>
-<<<<<<< HEAD
-										<a href="" class="dropdown-item">게시판 관리</a>
-										<a href="/admin/auctionPage" class="dropdown-item">옥션 관리</a>
-										<a href="" class="dropdown-item">핫딜 관리</a>
-										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
-										<a href="" class="dropdown-item">매출 관리</a>
-=======
+
 										<a href="/admin/auctionPage" class="dropdown-item">옥션 관리</a>
 										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
 										<a href="/admin/sales_OrderManagement" class="dropdown-item">매출&주문 관리</a>
->>>>>>> kyudong
+
 									</div>
 								</div>
 							</c:if>

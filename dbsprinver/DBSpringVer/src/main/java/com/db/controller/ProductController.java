@@ -260,51 +260,7 @@ public class ProductController {
 
 		return "/product/orderList";
 	}
-<<<<<<< HEAD
-	//옥션 리스트 페이지
-		@GetMapping("/auctionView")
-		public void auctionViewGET(Model model) throws Exception {
-			System.out.println("auctionView 접속");
-			ArrayList<AuctionVO> auVo = productService.getAuctionList();
-			for(AuctionVO vo : auVo) {
-				if(vo.getEndTime().before(new Date())) {
-					productService.endAuction(vo.getNum());
-				}
-			}
-			model.addAttribute("AuctionList",auVo);
-		}
-		
-		//옥션 상세 페이지
-		@GetMapping("auctionDetail")
-		public void auctionDetailGET(int num,String pName,Model model) throws Exception{
-			System.out.println("auctionDetail 접속");
-			AuctionVO auVo = productService.getAuctionDetail(num);
-			ProductVO pVo = productService.productDetailByPname(pName);
-//			if(auVo.getEndTime().before(new Date())) {	
-//				productService.auctionComplete(num);
-//			}
-			
-			model.addAttribute("originProduct",pVo);
-			model.addAttribute("auction",auVo);
-		}
-		
-		@PostMapping("dealAuction.do")
-		public String auctionEnrollPOST(AuctionVO auVo,String originProduct ,Model model) throws Exception{
-			System.out.println("dealAuction.do 실행");
-			System.out.println("dealAuction auVo: "+auVo);
-			productService.dealAuction(auVo);
-			model.addAttribute("pName", originProduct);
-			model.addAttribute("num", auVo.getNum());
-			return "redirect:/product/auctionDetail";
-		}
-		
-		@PostMapping("expiredAuction.do")
-		public void expiredAuctionPOST(int num) throws Exception {
-			System.out.println("expiredAuction.do 실행");
-			productService.endAuction(num);
-		}
 
-=======
 	//옥션 결제완료
 	@PostMapping("auctionPurchased")
 	public String auctionPurchasedPOST(CartVO cart, UserVO uVo, int totalprice, int auNum, int endPrice,Model model) throws Exception {
@@ -326,7 +282,6 @@ public class ProductController {
 		
 		return "/product/orderList";
 	}
->>>>>>> Jongmin2
 
 	//옥션 리스트 페이지
 	@GetMapping("/auctionView")

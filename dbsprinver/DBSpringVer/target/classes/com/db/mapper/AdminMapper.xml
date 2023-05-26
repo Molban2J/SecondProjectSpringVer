@@ -36,24 +36,13 @@
 		address3 = #{address3}, phone =	#{phone}, gender = #{gender}
 		where userid = #{userid}
 	</update>
-<<<<<<< HEAD
-	
+
 	<!-- 브랜드 등록 -->
 	<insert id="brandEnroll">
 		insert into brand values(#{bname}, #{imgurl})
 	</insert>
 	
 	<!-- 브랜드 삭제 -->
-	<delete id="deleteBrand">
-		delete from brand where bname = #{bname}
-	</delete>
-<<<<<<< HEAD
-=======
-
-	<insert id="brandEnroll">
-		insert into brand values(#{bname}, #{imgurl})
-	</insert>
-
 	<delete id="deleteBrand">
 		delete from brand where bname = #{bname}
 	</delete>
@@ -103,12 +92,6 @@
 		update order_detail set result = 5 where
 		ordernumber=#{ordernumber}
 	</update>
-	
-	
-	
->>>>>>> kyudong
-=======
-	
 	
 	<!-- 검색 조건문 -->
 	<sql id="criteria">
@@ -177,5 +160,5 @@
 		</if>
 
 	</select>
->>>>>>> Jongmin2
+
 </mapper>

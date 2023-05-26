@@ -10,16 +10,11 @@
 	
 </script>
 </head>
-<<<<<<< HEAD
-<body>
-	<jsp:include page="../header.jsp"></jsp:include>
 
-
-=======
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
 	<hr>
->>>>>>> kyudong
+
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
@@ -31,21 +26,11 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 
 	<!-- Page Header End -->
-
-
 	<!-- Shop Start -->
 	<div id="my-container" class="container-fluid pt-5">
 
-
-
-=======
-	<!-- Page Header End -->
-	<!-- Shop Start -->
-	<div id="my-container" class="container-fluid pt-5">
->>>>>>> kyudong
 		<!-- Shop Product Start -->
 		<div class="col-lg-9 col-md-12">
 			<div class="row pb-3">
@@ -53,13 +38,10 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 pb-1" align="center">
 						<div class="card product-item border-0 mb-4">
 							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-<<<<<<< HEAD
-								<a href="auctionDetail?num=${AuctionList.num}&pName=${AuctionList.pName}"><img class="img-fluid w-100" style="height: 280px" src="../resources/img/${AuctionList.imgUrl}" alt=""> </a>
-=======
 								<a href="auctionDetail?num=${AuctionList.num}&pName=${AuctionList.pName}">
 									<img class="img-fluid w-100" style="height: 280px" src="../resources/img/${AuctionList.imgUrl}" alt="">
 								</a>
->>>>>>> kyudong
+
 							</div>
 							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
 								<h6 class="text-truncate mb-3">${AuctionList.pName}</h6>
@@ -76,35 +58,13 @@
 							</div>
 						</div>
 						<c:if test="${AuctionList.onOff == 0}">
-<<<<<<< HEAD
-							<c:if test="${loginUser.userid eq AuctionList.userId}">
-								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='DBServlet?command=Auction_Buy_Page&pName=${AuctionList.pName}&pSize=${AuctionList.pSize }&dp=${Integer.parseInt(AuctionList.price)}'">
-<<<<<<< HEAD
-								
-=======
->>>>>>> kyudong
-=======
 							<c:if test="${user.userid eq AuctionList.userId}">
-								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">	
->>>>>>> Jongmin2
+								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">
 							</c:if>
 						</c:if>
 					</div>
 				</c:forEach>
-<<<<<<< HEAD
 
-			</div>
-		</div>
-		<!-- Shop Product End -->
-
-	</div>
-
-	<!-- Shop End -->
-
-
-	<jsp:include page="../footer.jsp"></jsp:include>
-</body>
-=======
 			</div>
 		</div>
 		<!-- Shop Product End -->
@@ -113,5 +73,5 @@
 	<hr>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
->>>>>>> kyudong
+
 </html>

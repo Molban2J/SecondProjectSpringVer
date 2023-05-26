@@ -5,12 +5,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
->>>>>>> kyudong
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +18,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 import org.springframework.web.bind.annotation.ResponseBody;
->>>>>>> kyudong
-=======
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
->>>>>>> Jongmin2
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.db.mapper.PageMakerDTO;
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
-<<<<<<< HEAD
+
 import com.db.model.OrderVO;
-=======
+
 import com.db.model.Criteria;
 import com.db.model.FBoardReplyVO;
->>>>>>> Jongmin2
+
 import com.db.model.ProductVO;
 import com.db.model.UserVO;
 import com.db.service.AdminService;
@@ -51,11 +46,7 @@ import com.db.service.UserService;
 @RequestMapping("/admin")
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> kyudong
 	@Autowired
 	ProductService productService;
 	@Autowired
@@ -98,15 +89,10 @@ public class AdminController {
 	public String addAuctionPOST(AuctionVO vo, RedirectAttributes rttr, String dateTimeInput) throws Exception {
 
 		vo.setPrice(vo.getStartPrice());
-<<<<<<< HEAD
-		Timestamp endTime = Timestamp.valueOf(dateTimeInput.replace("T", " ").concat(":00")); 
-		vo.setEndTime(endTime);
-		
-=======
+
 		Timestamp endTime = Timestamp.valueOf(dateTimeInput.replace("T", " ").concat(":00"));
 		vo.setEndTime(endTime);
 
->>>>>>> kyudong
 		int result = adminService.insertAuction(vo);
 		if (result > 0) {
 			rttr.addFlashAttribute("result", 1);
@@ -116,32 +102,34 @@ public class AdminController {
 
 		return "redirect:/";
 	}
-	//옥션 결제
+
+	// 옥션 결제
 	@GetMapping("auctionBuyPage")
 	public void auctionBuyPageGET(int num, Model model) throws Exception {
 		AuctionVO auVo = productService.getAuctionDetail(num);
-		model.addAttribute("auction",auVo);
-		
+		model.addAttribute("auction", auVo);
+
 	}
 	// 옥션 끝
 
 	// 회원관리 시작
 	// 회원관리 페이지
 	@GetMapping("userManagementPage")
-	public void userManagementpageGET(Model model, Criteria cri, @RequestParam(required = false) String category) throws Exception {
+	public void userManagementpageGET(Model model, Criteria cri, @RequestParam(required = false) String category)
+			throws Exception {
 		System.out.println("userManagementPage 접속");
-		
+
 		cri.setCategory(category); // category 값을 저장합니다.
-		
+
 		model.addAttribute("list", adminService.getUserListPaging(cri));
-		
+
 		int total = adminService.getUserTotal(cri);
 
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 
 		model.addAttribute("pageMaker", pageMake);
 	}
-	
+
 	// 회원정보 수정
 	@GetMapping("userManagementEdit")
 	public void userManagementEditGET(String userid, Model model) throws Exception {
@@ -163,7 +151,7 @@ public class AdminController {
 	@ResponseBody
 	public String userEditCompletePOST(UserVO vo) throws Exception {
 		System.out.println("userEditComplete.do 접속");
-		System.out.println("uservo: "+vo);
+		System.out.println("uservo: " + vo);
 		adminService.adminUserUpdate(vo);
 		System.out.println("userupdate: " + userService.userUpdate(vo));
 		String response = "success";
@@ -192,30 +180,6 @@ public class AdminController {
 		System.out.println("adminbrandWriteForm 접속");
 	}
 
-<<<<<<< HEAD
-	
-	@PostMapping("brandWrite.do")
-	public String brandWritePOST(String bname, MultipartFile uploadFile) throws Exception {
-		System.out.println("brandWrite.do 접속");
-		String uploadFolder = "C:\\Users\\user\\Documents\\SecondProjectSpringVer\\dbsprinver\\DBSpringVer\\src\\main\\webapp\\resources\\img";
-		
-		/* 폴더 생성 */
-		File uploadPath = new File(uploadFolder);
-		
-		System.out.println("uploadPath"+uploadPath);
-		if(uploadPath.exists() == false) {
-			uploadPath.mkdirs();
-		}
-		
-		/* 파일 이름 */
-		String uploadFileName = uploadFile.getOriginalFilename();		
-		
-		System.out.println("uploadfilename: "+ uploadFileName);
-		
-		/* 파일 위치, 파일 이름을 합친 File 객체 */
-		File saveFile = new File(uploadPath, uploadFileName);
-		
-=======
 	@PostMapping("brandWrite.do")
 	public String brandWritePOST(String bname, MultipartFile uploadFile) throws Exception {
 		System.out.println("brandWrite.do 접속");
@@ -237,55 +201,38 @@ public class AdminController {
 		/* 파일 위치, 파일 이름을 합친 File 객체 */
 		File saveFile = new File(uploadPath, uploadFileName);
 
->>>>>>> kyudong
 		/* 파일 저장 */
 		try {
 			uploadFile.transferTo(saveFile);
 		} catch (Exception e) {
 			e.printStackTrace();
-<<<<<<< HEAD
-		} 
-=======
+
 		}
->>>>>>> kyudong
 		BrandVO brand = new BrandVO();
 		brand.setBname(bname);
 		brand.setImgurl(uploadFileName);
 		adminService.brandEnroll(brand);
 		return "redirect:/admin/adminBrandList";
+
 	}
-<<<<<<< HEAD
-	
-	@GetMapping("adminBrandDelete")
-	public void  adminBrandDelete(Model model) throws Exception {
-=======
 
 	@GetMapping("adminBrandDelete")
 	public void adminBrandDelete(Model model) throws Exception {
->>>>>>> kyudong
+
 		System.out.println("adminBrandDelete 접속");
 		List<BrandVO> bList = productService.brandList();
 		model.addAttribute("blist", bList);
 	}
-<<<<<<< HEAD
-	
-	@PostMapping("deleteBrand.do")
-	public String deleteBrandPOST(String bname) throws Exception {
-		System.out.println("deleteBrand.do 실행");
-		System.out.println("삭제할 브랜드:"+bname);
-=======
 
 	@PostMapping("deleteBrand.do")
 	public String deleteBrandPOST(String bname) throws Exception {
 		System.out.println("deleteBrand.do 실행");
 		System.out.println("삭제할 브랜드:" + bname);
->>>>>>> kyudong
+
 		adminService.deleteBrand(bname);
 		return "redirect:/admin/adminBrandList";
 	}
 	// 상품관리 끝
-<<<<<<< HEAD
-=======
 
 	// 매출 & 주문 관리
 	@GetMapping("/sales_OrderManagement")
@@ -392,5 +339,4 @@ public class AdminController {
 		return "/admin/salesOrder";
 	}
 
->>>>>>> kyudong
 }

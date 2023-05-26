@@ -9,14 +9,11 @@ import org.springframework.stereotype.Service;
 import com.db.mapper.AdminMapper;
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 import com.db.model.OrderVO;
->>>>>>> kyudong
-=======
+
 import com.db.model.Criteria;
->>>>>>> Jongmin2
+
 import com.db.model.UserVO;
 
 @Service
@@ -59,9 +56,6 @@ public class AdminServiceImpl implements AdminService{
 	public void deleteBrand(String bname) throws Exception {
 		mapper.deleteBrand(bname);
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
 	@Override
 	public ArrayList<OrderVO> getNewOrder() throws Exception {
@@ -105,18 +99,16 @@ public class AdminServiceImpl implements AdminService{
 	
 		return mapper.getSalesOrder();
 	}
->>>>>>> kyudong
-=======
 
 	@Override
 	public List<UserVO> getUserListPaging(Criteria cri) throws Exception {
 		return mapper.getUserListPaging(cri);
 	}
-
+ 
 	@Override
 	public int getUserTotal(Criteria cri) throws Exception {
 		return mapper.getUserTotal(cri);
 	}
->>>>>>> Jongmin2
+
 	
 }
