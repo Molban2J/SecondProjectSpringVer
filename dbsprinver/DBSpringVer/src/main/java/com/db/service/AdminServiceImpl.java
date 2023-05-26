@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.db.mapper.AdminMapper;
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
+<<<<<<< HEAD
+=======
+import com.db.model.OrderVO;
+>>>>>>> kyudong
 import com.db.model.UserVO;
 
 @Service
@@ -50,5 +54,51 @@ public class AdminServiceImpl implements AdminService{
 	public void deleteBrand(String bname) throws Exception {
 		mapper.deleteBrand(bname);
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public ArrayList<OrderVO> getNewOrder() throws Exception {
+	
+		return mapper.getNewOrder();
+	}
+
+	@Override
+	public ArrayList<OrderVO> getProcessOrder() throws Exception {
+		
+		return mapper.getProcessOrder();
+	}
+
+	@Override
+	public ArrayList<OrderVO> getWithdrawOrder() throws Exception {
+		
+		return mapper.getWithdrawOrder();
+	}
+
+	@Override
+	public int shipmentChangeResult(int ordernumber) {
+		
+		return mapper.shipmentChangeResult(ordernumber);
+				
+	}
+
+	@Override
+	public int checkOrderChangeResult(int ordernumber) {
+	
+		return mapper.checkOrderChangeResult(ordernumber);
+	}
+
+	@Override
+	public int withdrawOrderChangeResult(int ordernumber) {
+		
+		return mapper.withdrawOrderChangeResult(ordernumber);
+	}
+
+	@Override
+	public ArrayList<OrderVO> getSalesOrder() throws Exception {
+	
+		return mapper.getSalesOrder();
+	}
+>>>>>>> kyudong
 	
 }

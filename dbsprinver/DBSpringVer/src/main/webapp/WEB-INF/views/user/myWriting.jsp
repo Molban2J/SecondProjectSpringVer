@@ -12,44 +12,42 @@
 <body>
 	<hr>
 	<div class="container">
-	<div style="height: 550px">
-		<div class="row" >
-			<table class="table" style="text-align: center; border: 1px solid #dddddd">
-				<thead>
-					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">번호</th>
-						<th style="background-color: #eeeeee; text-align: center;">분류</th>
-						<th style="background-color: #eeeeee; text-align: center; width: 40%;">제목</th>
-						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
-						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
-						<th style="background-color: #eeeeee; text-align: center;">조회수</th>
-					</tr>
-				</thead>
-				<c:forEach items="${list}" var="list">
-					<%--     <c:if test="${list.userid == admin2 }"> --%>
-					<tr class="record">
-						<td><c:out value="${list.num}" /></td>
-						<td><c:choose>
-								<c:when test="${list.category == 'F'}">[자&nbsp;&nbsp;&nbsp;유]</c:when>
-								<c:when test="${list.category == 'Q'}">[질&nbsp;&nbsp;&nbsp;문]</c:when>
-								<c:when test="${list.category == 'S'}">[공지사항]</c:when>
-							</c:choose></td>
-						<td><a class="move" href='<c:out value="${list.num}"/>'>
-								<c:out value="${list.title}" />
-								(
-								<c:out value="${list.reply_count}" />
-								)
-							</a></td>
-						<td><c:out value="${list.userid}" /></td>
-						<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.writedate}" /></td>
-						<td><c:out value="${list.readcount}" /></td>
-					</tr>
-				</c:forEach>
-			</table>
+		<div style="height: 550px">
+			<div class="row">
+				<table class="table" style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th style="background-color: #eeeeee; text-align: center;">번호</th>
+							<th style="background-color: #eeeeee; text-align: center;">분류</th>
+							<th style="background-color: #eeeeee; text-align: center; width: 40%;">제목</th>
+							<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+							<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+							<th style="background-color: #eeeeee; text-align: center;">조회수</th>
+						</tr>
+					</thead>
+					<c:forEach items="${list}" var="list">
+						<%--     <c:if test="${list.userid == admin2 }"> --%>
+						<tr class="record">
+							<td><c:out value="${list.num}" /></td>
+							<td><c:choose>
+									<c:when test="${list.category == 'F'}">[자&nbsp;&nbsp;&nbsp;유]</c:when>
+									<c:when test="${list.category == 'Q'}">[질&nbsp;&nbsp;&nbsp;문]</c:when>
+									<c:when test="${list.category == 'S'}">[공지사항]</c:when>
+								</c:choose></td>
+							<td><a class="move" href='<c:out value="${list.num}"/>'>
+									<c:out value="${list.title}" />
+									(
+									<c:out value="${list.reply_count}" />
+									)
+								</a></td>
+							<td><c:out value="${list.userid}" /></td>
+							<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.writedate}" /></td>
+							<td><c:out value="${list.readcount}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		</div>
-		</div>
-		
-		
 		<!-- 페이징 -->
 		<div class="col-12 pb-1">
 			<div class="pageInfo_wrap">
@@ -85,9 +83,6 @@
 	</div>
 	<hr>
 	<script>
-	
-		
-
 		let moveForm = $("#moveForm");
 
 		$(".move").on(
@@ -108,10 +103,6 @@
 			moveForm.submit();
 
 		});
-		
-		
-
-		
 	</script>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>

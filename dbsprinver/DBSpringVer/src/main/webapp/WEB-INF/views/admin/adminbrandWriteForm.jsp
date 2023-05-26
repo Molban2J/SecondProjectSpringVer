@@ -8,7 +8,10 @@
 <!-- 
 <script type="text/javascript" src="script/admin.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> kyudong
 <style>
 .image-regit {
 	position: absolute;
@@ -50,12 +53,20 @@
 	opacity: 0.5;
 }
 </style>
+<<<<<<< HEAD
 </head>
 <body>
 	<div>
 		<jsp:include page="../header.jsp"></jsp:include>
 
 
+=======
+<jsp:include page="../header.jsp"></jsp:include>
+</head>
+<body>
+	<hr>
+	<div>
+>>>>>>> kyudong
 		<!-- Page Header Start -->
 		<div class="container bg-secondary mb-3" style="max-width: 800px;">
 			<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
@@ -67,8 +78,11 @@
 		</div>
 	</div>
 	<!-- Page Header End -->
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> kyudong
 	<!-- Shop Detail Start -->
 	<div class="container-fluid py-5">
 		<form action="brandWrite.do" method="post" name="frm" enctype="multipart/form-data">
@@ -77,12 +91,19 @@
 					<div id="product-carousel" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner border" style="height: 500px;">
 							<div class="blur">이미지 등록</div>
+<<<<<<< HEAD
 							<input type="file" class="btn btn-primary px-3 image-regit" name="uploadFile" id="file-upload-1" onchange="previewFile(), selectSameFile(event)">
 							<img style="width: 100%;" class="img-fluid preview-img" src="" alt="">
 						</div>
 					</div>
 				</div>
 
+=======
+							<input type="file" class="btn btn-primary px-3 image-regit" name="uploadFile" id="file-upload-1" onchange="previewFile(), selectSameFile(event)"> <img style="width: 100%;" class="img-fluid preview-img" src="" alt="">
+						</div>
+					</div>
+				</div>
+>>>>>>> kyudong
 				<div class="col-lg-7 pb-5">
 					<div class="d-flex mb-3" style="margin-top: 150px;">
 						<p class="text-dark font-weight-medium mb-0 mr-3">Brand Name:</p>
@@ -103,6 +124,7 @@
 			</div>
 		</form>
 	</div>
+<<<<<<< HEAD
 
 
 
@@ -156,6 +178,54 @@ function fileCheck(fileName, fileSize){
 	return true;		
 }
 </script>
+=======
+	<!-- Shop Detail End -->
+	<hr>
+	<script>
+		//미리보기 사진
+		function previewFile() {
+			const preview = document.querySelector('.preview-img');
+			const file = event.target.files[0];
+			const reader = new FileReader();
+>>>>>>> kyudong
 
+			reader.addEventListener("load", function() {
+				// 파일을 읽어서 이미지 URL로 설정합니다.
+				preview.src = reader.result;
+			}, false);
+
+			if (file) {
+				// 파일을 읽습니다.
+				reader.readAsDataURL(file);
+			}
+		}
+		//두개의 input이 같은 파일을 선택하도록 지정
+		function selectSameFile(event) {
+			const inputElements = document.querySelectorAll('input[type=file]');
+
+			for (let i = 0; i < inputElements.length; i++) {
+				inputElements[i].files = event.target.files;
+			}
+		}
+
+		let regex = new RegExp("(.*?)\.(jpg|png)$");
+		let maxSize = 1048576 * 5; //5MB	
+
+		function fileCheck(fileName, fileSize) {
+
+			if (fileSize >= maxSize) {
+				alert("파일 사이즈 초과");
+				return false;
+			}
+
+			if (!regex.test(fileName)) {
+				alert("해당 종류의 파일은 업로드할 수 없습니다.");
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 </body>
+<jsp:include page="../footer.jsp"></jsp:include>
 </html>

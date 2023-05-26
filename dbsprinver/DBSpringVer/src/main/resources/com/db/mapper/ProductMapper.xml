@@ -289,7 +289,11 @@
 	</update>
 
 	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
+<<<<<<< HEAD
 		select * from auction order by onOff desc ,endTime
+=======
+		select * from auction order by endTime, onOff desc
+>>>>>>> kyudong
 	</select>
 	
 	<select id="getAuctionDetail" resultType="com.db.model.AuctionVO">

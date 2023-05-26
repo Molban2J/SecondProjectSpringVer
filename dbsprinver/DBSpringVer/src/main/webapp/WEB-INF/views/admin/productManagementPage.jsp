@@ -4,13 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/adminTheme.css">
+<jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
 	<hr>
-
-
 	<div class="mypage-container">
 		<div class="mypage-header"></div>
 		<div class="mypage-wrapper">
@@ -26,16 +23,12 @@
 							<button type="button" onclick="location.href='adminBrandList'">브랜드 관리</button>
 							<button type="button" onclick="location.href='adminProductList'">상품 관리</button>
 						</ul>
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<hr>
 </body>
+<jsp:include page="../footer.jsp"></jsp:include>
 </html>

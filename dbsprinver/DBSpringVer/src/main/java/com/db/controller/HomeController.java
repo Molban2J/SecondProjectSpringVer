@@ -56,6 +56,11 @@ public class HomeController {
 
 		return "home";
 	}
+	// qna 페이지
+    @GetMapping("/qna")
+    public void qnaGET() {
+       logger.info("qna 페이지 진입");
+    }
 
 	// Contact 페이지
 	@GetMapping("/contact")

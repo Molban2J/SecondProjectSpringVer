@@ -8,8 +8,12 @@
 <link rel="stylesheet" type="text/css" href="css/shopuserTheme.css">
 <script type="text/javascript" src="..resources/js/shopuser.js"></script>
  -->
+<<<<<<< HEAD
  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
  
+=======
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+>>>>>>> kyudong
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -26,7 +30,6 @@
 					<th>이름</th>
 					<td><input type="text" name="name" value="${shopUser.name }" required="required"></td>
 				</tr>
-
 				<tr>
 					<th>성별</th>
 					<c:choose>
@@ -37,7 +40,6 @@
 							<td><input type="radio" name="gender" value="1"> 남자 <input type="radio" name="gender" value="2" checked="checked"> 여자</td>
 						</c:otherwise>
 					</c:choose>
-
 					<th>이메일</th>
 					<td><input type="email" name="email" value="${shopUser.email }"></td>
 					<th>등급</th>
@@ -110,9 +112,12 @@
 					<th>가입일자</th>
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
 				</tr>
-
 			</table>
+<<<<<<< HEAD
 			<input class="modify" value="수정" type="submit" >
+=======
+			<input class="modify" value="수정" type="submit">
+>>>>>>> kyudong
 		</form>
 	</div>
 

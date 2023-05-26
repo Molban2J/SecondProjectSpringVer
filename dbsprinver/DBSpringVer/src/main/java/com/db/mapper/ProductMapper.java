@@ -64,6 +64,7 @@ public interface ProductMapper {
 
 	// 장바구니 상품 삭제
 	public int cartDelete(int cartnum);
+<<<<<<< HEAD
 	
 	//제품 이름으로 제품 불러오기
 	public ProductVO productDetailByPname(String name);
@@ -80,6 +81,24 @@ public interface ProductMapper {
 	//기간이 지난 경매(onOff설정)
 	public void endAuction(int num);
 	
+=======
+
+	// 제품 이름으로 제품 불러오기
+	public ProductVO productDetailByPname(String name);
+
+	// 옥션 목록 가져오기
+	public ArrayList<AuctionVO> getAuctionList();
+
+	// 옥션 상세 보기
+	public AuctionVO getAuctionDetail(int num);
+
+	// 경매 입찰
+	public void dealAuction(AuctionVO auVo);
+
+	// 기간이 지난 경매(onOff설정)
+	public void endAuction(int num);
+
+>>>>>>> kyudong
 	// 결제 정보 추가(orders table)
 	public void addOrders(String userid);
 
@@ -101,8 +120,7 @@ public interface ProductMapper {
 	// 사용한 쿠폰 result -> 0 으로 변경
 	public int useCoupon(@Param("cnum") int cnum);
 
-	 // 주문완료 후 포인트 지급
-    void increaseUserPoint(Map<String, Object> params);
-    
- 
+	// 주문완료 후 포인트 지급
+	void increaseUserPoint(Map<String, Object> params);
+
 }

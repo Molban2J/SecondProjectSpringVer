@@ -6,13 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>유저 관리 페이지</title>
-
 <style>
 .list {
 	width: 70%;
 	border: none;
 	table-layout: auto;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> kyudong
 }
 
 th {
@@ -33,21 +35,34 @@ td {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 .hiddentd{
+=======
+.hiddentd {
+>>>>>>> kyudong
 	width: 100px;
 	border: none;
 	text-align: center;
 }
 
+<<<<<<< HEAD
 .hiddenbutton{
 	display: none;
 }
 
 .button:hover{
+=======
+.hiddenbutton {
+	display: none;
+}
+
+.button:hover {
+>>>>>>> kyudong
 	background-color: pink;
 	font-weight: 600;
 }
 
+<<<<<<< HEAD
 tr:hover .hiddenbutton{
 	display: block;
 }
@@ -57,12 +72,23 @@ tr:hover .hiddentd{
 
 .point{
 	width:10px;
+=======
+tr:hover .hiddenbutton {
+	display: block;
+}
+
+tr:hover .hiddentd {
+	background-color: white;
+}
+
+.point {
+	width: 10px;
+>>>>>>> kyudong
 }
 </style>
+<jsp:include page="../header.jsp"></jsp:include>
 </head>
-
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
 	<hr>
 	<div id="wrap" align="center">
 		<h1>회원 목록</h1>
@@ -123,18 +149,21 @@ tr:hover .hiddentd{
 					</c:choose>
 					<td>${shopUser.point }</td>
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
+<<<<<<< HEAD
 				
 					<td class="hiddentd"><input type="button" class="btn-primary px-3 hiddenbutton" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${shopUser.userid }')"> <input type="button" class="btn-primary px-3 delete hiddenbutton" value="삭제"
 						onclick="location.href='/admin/userDelete?shopUserid=${shopUser.userid }'"></td>
 						 
 						 
+=======
+					<td class="hiddentd"><input type="button" class="btn-primary px-3 hiddenbutton" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${shopUser.userid }')"> <input type="button" class="btn-primary px-3 delete hiddenbutton" value="삭제" onclick="location.href='/admin/userDelete?shopUserid=${shopUser.userid }'"></td>
+>>>>>>> kyudong
 				</tr>
 			</c:forEach>
 		</table>
 		<br>
 	</div>
-	<jsp:include page="../footer.jsp"></jsp:include>
-
+	<hr>
 	<script>
 		function open_win(url) {
 			// 새 창의 속성들을 설정하는 문자열입니다.
@@ -145,6 +174,6 @@ tr:hover .hiddentd{
 		}
 		
 	</script>
-	 
 </body>
+<jsp:include page="../footer.jsp"></jsp:include>
 </html>
