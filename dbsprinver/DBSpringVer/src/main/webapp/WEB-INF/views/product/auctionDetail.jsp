@@ -123,82 +123,113 @@
 	<hr>
 	
 	<script>
+	// 현재 날짜와 시간 가져오기
+	var now = new Date().getTime();
+
+	// 타이머가 끝날 날짜와 시간 설정 (예: 2023년 5월 1일)
+	var countDownDate = ${auction.endTime.getTime()};
+
+	// 매 초마다 실행될 함수
+	 if(document.frm.onOff.value != 0){
+	var x =	setInterval(function() {
+
+
 		// 현재 날짜와 시간 가져오기
 		var now = new Date().getTime();
 
-		// 타이머가 끝날 날짜와 시간 설정 (예: 2023년 5월 1일)
-		var countDownDate = ${auction.endTime.getTime()};
+		// 남은 시간 계산
+		var distance = countDownDate - now;
 
-		// 매 초마다 실행될 함수
-		if (document.frm.onOff.value != 0) {
-			var x = setInterval(
-					function() {
+		// 남은 시간을 초, 분, 시, 일 단위로 변환
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24))
+				/ (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		var milliseconds = distance % 10;
 
-						// 현재 날짜와 시간 가져오기
-						var now = new Date().getTime();
+		// 표시할 텍스트 생성
+		var countdownText = days + "일 " + hours + "시간 " + minutes + "분 "
+				+ seconds + ". " + milliseconds + " 초 ";
 
-						// 남은 시간 계산
-						var distance = countDownDate - now;
+		// 텍스트를 countdown ID를 가진 HTML 요소에 삽입
+		document.getElementById("countdown").innerHTML = countdownText;
 
-						// 남은 시간을 초, 분, 시, 일 단위로 변환
-						var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-						var hours = Math
-								.floor((distance % (1000 * 60 * 60 * 24))/ (1000 * 60 * 60));
-						var minutes = Math.floor((distance % (1000 * 60 * 60))/ (1000 * 60));
-						var seconds = Math
-								.floor((distance % (1000 * 60)) / 1000);
-						var milliseconds = distance % 10;
-
-						// 표시할 텍스트 생성
-						var countdownText = days + "일 " + hours + "시간 "
-								+ minutes + "분 " + seconds + ". "
-								+ milliseconds + " 초 ";
-
-						// 텍스트를 countdown ID를 가진 HTML 요소에 삽입
-						document.getElementById("countdown").innerHTML = countdownText;
-
-						// 타이머 종료 시 실행될 함수
-						if (distance <= 0) {
-							sendOnOffToServer();
-							clearInterval(x);
-							document.getElementById("countdown").innerHTML = "기간이 만료된 경매입니다.";
-
-						}
-					}, 50);
-		} else {
+		// 타이머 종료 시 실행될 함수
+		if (distance <= 0) {
+			sendOnOffToServer();
+			clearInterval(x);
 			document.getElementById("countdown").innerHTML = "기간이 만료된 경매입니다.";
+			
 		}
+	}, 100);
+	} else{
+		document.getElementById("countdown").innerHTML = "기간이 만료된 경매입니다.";
+	}
+	
+	 function sendOnOffToServer() {
+		  // num과 onOff 값을 서버로 전송
+		  var numValue = ${auction.num};
+		  
+		  // 서버로 전송할 데이터를 FormData 객체에 추가
+		  var formData = new FormData();
+		  formData.append('num', numValue);
 
-		function sendOnOffToServer() {
-			// num과 onOff 값을 서버로 전송
+		  // AJAX 요청
+		  var xhr = new XMLHttpRequest();
+		  xhr.open('POST', '/product/expiredAuction.do', true);
+		  xhr.onreadystatechange = function() {
+		    if (xhr.readyState === XMLHttpRequest.DONE) {
+		      if (xhr.status === 200) {
+		        // 서버 응답 성공
+		        console.log('서버 응답:', xhr.responseText);
+		        document.getElementById('message').innerHTML = '기간이 만료된 경매입니다.';
+		        
+		        // 페이지 새로고침
+		        location.reload();
+		      } else {
+		        // 서버 응답 실패
+		        console.error('서버 응답 오류:', xhr.status);
+		     // 페이지 새로고침
+		        location.reload();
+		      }
+		    }
+		  };
+		  xhr.send(formData);
+		}
+	 if(document.frm.onOff.value != 0){
+	 $(document).ready(function() {
+		  fetchPrice(); // 페이지 로드 시 가격 가져오기
+
+		  // 일정 간격마다 가격을 업데이트하기 위해 fetchPrice() 함수를 호출합니다.
+		  setInterval(fetchPrice, 1000); // 1초마다 업데이트
+		});
+	 }
+
+		function fetchPrice() {
 			var numValue = ${auction.num};
-
-			// 서버로 전송할 데이터를 FormData 객체에 추가
-			var formData = new FormData();
-			formData.append('num', numValue);
-
-			// AJAX 요청
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '/product/expiredAuction.do', true);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === XMLHttpRequest.DONE) {
-					if (xhr.status === 200) {
-						// 서버 응답 성공
-						console.log('서버 응답:', xhr.responseText);
-						document.getElementById('message').innerHTML = '기간이 만료된 경매입니다.';
-
-						// 페이지 새로고침
-						location.reload();
-					} else {
-						// 서버 응답 실패
-						console.error('서버 응답 오류:', xhr.status);
-						// 페이지 새로고침
-						location.reload();
-					}
-				}
-			};
-			xhr.send(formData);
+			
+		  $.ajax({
+		    url: '/product/getPrice',
+		    type: 'post', // POST 방식으로 변경
+		    data: { num: numValue }, // num 값을 매개변수로 전달
+		    success: function(price) {
+		    	console.log("가격:", price);
+		      updatePrice(price);
+		    },
+		    error: function(xhr, status, error) {
+		      console.error('가격을 가져오는 동안 오류가 발생했습니다:', error);
+		    }
+		  });
 		}
+
+		function updatePrice(price) {
+			const priceEl = document.getElementById('cPrice');
+			priceEl.innerText = price; // span 요소인 경우
+			const curruntPrice = document.getElementById('currentPrice');
+			currentPrice.value = price;
+		}
+
 	</script>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
