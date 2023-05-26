@@ -3,7 +3,6 @@ package com.db.controller;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,11 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.db.mapper.PageMakerDTO;
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
+import com.db.model.Criteria;
+import com.db.model.FBoardReplyVO;
 import com.db.model.ProductVO;
 import com.db.model.UserVO;
 import com.db.service.AdminService;
@@ -84,17 +88,32 @@ public class AdminController {
 
 		return "redirect:/";
 	}
+	//옥션 결제
+	@GetMapping("auctionBuyPage")
+	public void auctionBuyPageGET(int num, Model model) throws Exception {
+		AuctionVO auVo = productService.getAuctionDetail(num);
+		model.addAttribute("auction",auVo);
+		
+	}
 	// 옥션 끝
 
 	// 회원관리 시작
 	// 회원관리 페이지
 	@GetMapping("userManagementPage")
-	public void userManagementpageGET(Model model) throws Exception {
+	public void userManagementpageGET(Model model, Criteria cri, @RequestParam(required = false) String category) throws Exception {
 		System.out.println("userManagementPage 접속");
-		ArrayList<UserVO> user = adminService.getUserList();
-		model.addAttribute("shopUser", user);
-	}
+		
+		cri.setCategory(category); // category 값을 저장합니다.
+		
+		model.addAttribute("list", adminService.getUserListPaging(cri));
+		
+		int total = adminService.getUserTotal(cri);
 
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+	}
+	
 	// 회원정보 수정
 	@GetMapping("userManagementEdit")
 	public void userManagementEditGET(String userid, Model model) throws Exception {
@@ -113,12 +132,14 @@ public class AdminController {
 
 	// 회원 수정 완료
 	@PostMapping("userEditComplete.do")
+	@ResponseBody
 	public String userEditCompletePOST(UserVO vo) throws Exception {
 		System.out.println("userEditComplete.do 접속");
+		System.out.println("uservo: "+vo);
 		adminService.adminUserUpdate(vo);
-		System.out.println("userpoint: " + vo.getPoint());
 		System.out.println("userupdate: " + userService.userUpdate(vo));
-		return "redirect:/admin/userManagementEdit";
+		String response = "success";
+		return response;
 	}
 	// 회원관리 끝
 

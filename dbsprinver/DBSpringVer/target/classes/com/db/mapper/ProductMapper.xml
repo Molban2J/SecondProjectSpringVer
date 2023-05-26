@@ -289,7 +289,7 @@
 	</update>
 
 	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
-		select * from auction order by onOff desc ,endTime
+		select * from auction order by onOff desc ,endTime desc
 	</select>
 	
 	<select id="getAuctionDetail" resultType="com.db.model.AuctionVO">
@@ -301,5 +301,7 @@
 	<update id="endAuction">
 		update auction set onOff=0 where num = #{num}
 	</update>
-
+	<update id="setAuctionEndPrice">
+		update auction set endPrice = #{endPrice} where num = #{num}
+	</update>
 </mapper>

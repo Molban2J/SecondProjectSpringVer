@@ -196,4 +196,9 @@ public class ProductServiceImpl implements ProductService {
 		productmapper.endAuction(num);
 	}
 
+	@Override
+	public void setAuctionEndPrice(int num, int endPrice) throws Exception {
+		productmapper.setAuctionEndPrice(num, endPrice);
+	}
+
 }

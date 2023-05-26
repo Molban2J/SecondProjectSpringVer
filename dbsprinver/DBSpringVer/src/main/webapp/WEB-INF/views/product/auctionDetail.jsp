@@ -95,6 +95,9 @@
 						<input type="hidden" name="currentPrice" id="currentPrice" value="${auction.price }">
 						<c:choose>
 							<c:when test="${auction.onOff==0 }">
+								<c:if test="${user.userid eq AuctionList.userId}">
+								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='AuctionBuyPage?pName=${auction.pName}&pSize=${auction.pSize }&dp=${Integer.parseInt(auction.price)}'">
+								</c:if>
 								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='/product/auctionView'">
 							</c:when>
 							<c:otherwise>

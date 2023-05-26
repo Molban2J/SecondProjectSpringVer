@@ -58,9 +58,8 @@
 							</div>
 						</div>
 						<c:if test="${AuctionList.onOff == 0}">
-							<c:if test="${loginUser.userid eq AuctionList.userId}">
-								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='DBServlet?command=Auction_Buy_Page&pName=${AuctionList.pName}&pSize=${AuctionList.pSize }&dp=${Integer.parseInt(AuctionList.price)}'">
-								
+							<c:if test="${user.userid eq AuctionList.userId}">
+								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">	
 							</c:if>
 						</c:if>
 					</div>
