@@ -265,6 +265,11 @@
     <select id="productDetailByPname" resultType="com.db.model.ProductVO">
         select * from product where pname = #{pname} and rownum = 1
     </select>
+    
+    <!-- 제품 이름으로 제품상세 불러오기 -->
+    <select id="productDetailByPnamepSize" resultType="com.db.model.ProductVO">
+        select * from product where pname = #{param1} and  psize = #{param2}
+    </select>
 
 
 	
@@ -302,6 +307,6 @@
 		update auction set onOff=0 where num = #{num}
 	</update>
 	<update id="setAuctionEndPrice">
-		update auction set endPrice = #{endPrice} where num = #{num}
+		update auction set endprice = #{arg0} where num = #{arg1}
 	</update>
 </mapper>

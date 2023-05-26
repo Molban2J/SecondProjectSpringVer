@@ -8,12 +8,9 @@
 <link rel="stylesheet" type="text/css" href="css/shopuserTheme.css">
 <script type="text/javascript" src="..resources/js/shopuser.js"></script>
  -->
-<<<<<<< HEAD
- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
- 
-=======
+
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
->>>>>>> kyudong
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -113,15 +110,9 @@
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
 				</tr>
 			</table>
-<<<<<<< HEAD
-<<<<<<< HEAD
-			<input class="modify" value="수정" type="submit" >
-=======
-			<input class="modify" value="수정" type="submit">
->>>>>>> kyudong
-=======
+
 			<input type="submit" value="수정">
->>>>>>> Jongmin2
+
 		</form>
 	</div>
 	<script>	

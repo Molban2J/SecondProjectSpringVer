@@ -14,20 +14,12 @@ img {
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
-<<<<<<< HEAD
-	<jsp:include page="../header.jsp"></jsp:include>
-	<div id="wrap" align="center">
-		<hr>
-		<h1 style="margin-top: 80px;" class="font-weight-semi-bold text-uppercase mb-3">브랜드 리스트 관리</h1>
-		<input type="button" style="margin: 40px 0" class="btn btn-primary px-3" value="브랜드 등록" onclick="location.href='adminbrandWriteForm'">
-		<input type="button" style="margin: 40px 0" class="btn btn-primary px-3" value="브랜드 삭제" onclick="location.href='adminBrandDelete'">
-=======
+
 	<hr>
 	<div id="wrap" align="center">
 		<hr>
 		<h1 style="margin-top: 80px;" class="font-weight-semi-bold text-uppercase mb-3">브랜드 리스트 관리</h1>
 		<input type="button" style="margin: 40px 0" class="btn btn-primary px-3" value="브랜드 등록" onclick="location.href='adminbrandWriteForm'"> <input type="button" style="margin: 40px 0" class="btn btn-primary px-3" value="브랜드 삭제" onclick="location.href='adminBrandDelete'">
->>>>>>> kyudong
 		<!-- Categories Start -->
 		<div class="container-fluid pt-5">
 			<div class="row px-xl-5 pb-3">

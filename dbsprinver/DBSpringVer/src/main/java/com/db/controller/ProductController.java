@@ -265,14 +265,23 @@ public class ProductController {
 	@PostMapping("auctionPurchased")
 	public String auctionPurchasedPOST(CartVO cart, UserVO uVo, int totalprice, int auNum, int endPrice,Model model) throws Exception {
 		System.out.println("auctionPurchased 실행");
-		productService.addCart(cart);
+		AuctionVO auVo = productService.getAuctionDetail(auNum);
+		String param1 = auVo.getpName();
+		String param2 = auVo.getpSize();
+		//System.out.println("pname/psize"+ param1+"/"+param2);
+		cart.setNum(productService.productDetailByPnamepSize(param1, param2).getNum()); //cart num 수정
+		cart.setResult(0);
+		//productService.addCart(cart);
 		//System.out.println("endPrice: "+endPrice);
-		//productService.setAuctionEndPrice(auNum, endPrice); //옥션 endPrice 설정
+		int arg1 = auNum;
+		int arg0 = endPrice;
+		productService.setAuctionEndPrice(arg0, arg1); //옥션 endPrice 설정
 		int orderNumber = productService.getLatestOrderNumber(uVo.getUserid());// orderNumber를 가져옴
-		
+
 		productService.addOrderDetail(cart, totalprice, orderNumber, uVo.getName(), uVo.getPhone(), uVo.getEmail(), uVo.getAddress1(), uVo.getAddress2(),
 				uVo.getAddress3());
-		productService.cartResultChange(cart.getCartnum(), cart);
+		
+		//productService.cartResultChange(cart.getCartnum(), cart);
 		
 		ArrayList<ProductVO> plist = productService.getAllProduct();
 		model.addAttribute("plist", plist); // 상품정보 불러오고 저장

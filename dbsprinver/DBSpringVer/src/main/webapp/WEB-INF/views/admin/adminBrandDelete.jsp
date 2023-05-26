@@ -51,14 +51,9 @@ img {
 }
 </style>
 </head>
-<<<<<<< HEAD
-<body>
-	<jsp:include page="../header.jsp"></jsp:include>
-=======
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
 	<hr>
->>>>>>> kyudong
 	<div id="wrap" align="center">
 		<hr>
 		<h1 style="margin-top: 80px;" class="font-weight-semi-bold text-uppercase mb-3">브랜드 삭제</h1>
@@ -81,22 +76,11 @@ img {
 						</div>
 					</div>
 				</c:forEach>
-<<<<<<< HEAD
-
-			</div>
-
-		</div>
-		<input type="button" class="btn btn-primary px-3" value="뒤로가기" onclick="location.href='adminBrandList'">
-	</div>
-	<jsp:include page="../footer.jsp"></jsp:include>
-
-=======
 			</div>
 		</div>
 		<input type="button" class="btn btn-primary px-3" value="뒤로가기" onclick="location.href='adminBrandList'">
 	</div>
 	<hr>
->>>>>>> kyudong
 	<script>
 		function deleteBrand(bname) {
 			if (confirm("삭제하면 브랜드 내의 모든 상품이 사라집니다. 브랜드<"+bname+">을(를) 삭제하시겠습니까?")) {
@@ -105,8 +89,7 @@ img {
 		}
 	</script>
 </body>
-<<<<<<< HEAD
-=======
+
 <jsp:include page="../footer.jsp"></jsp:include>
->>>>>>> kyudong
+
 </html>

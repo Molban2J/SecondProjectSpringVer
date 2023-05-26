@@ -85,6 +85,19 @@
 						<input type="hidden" name="originProduct" value="${originProduct.pname }">
 						<c:choose>
 							<c:when test="${auction.onOff==0 }">
+
+								<c:if test="${user.userid eq auction.userId}">
+
+									<c:choose>
+										<c:when test="${auction.endPrice > 0}">
+											<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="이미 구매 완료한 상품입니다." onclick="#" disabled="disabled">
+										</c:when>
+										<c:otherwise>
+											<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">
+										</c:otherwise>
+									</c:choose>
+
+								</c:if>
 								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='DBServlet?command=auction_view'">
 							</c:when>
 							<c:otherwise>
@@ -103,18 +116,18 @@
 				</form>
 
 			</div>
+		</div>
+	</div>
 
 	<!-- Shop Detail End -->
-<hr>
+	<hr>
+	
 	<script>
 		// 현재 날짜와 시간 가져오기
 		var now = new Date().getTime();
 
 		// 타이머가 끝날 날짜와 시간 설정 (예: 2023년 5월 1일)
-		var countDownDate = $
-		{
-			auction.endTime.getTime()
-		};
+		var countDownDate = ${auction.endTime.getTime()};
 
 		// 매 초마다 실행될 함수
 		if (document.frm.onOff.value != 0) {
@@ -130,10 +143,8 @@
 						// 남은 시간을 초, 분, 시, 일 단위로 변환
 						var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 						var hours = Math
-								.floor((distance % (1000 * 60 * 60 * 24))
-										/ (1000 * 60 * 60));
-						var minutes = Math.floor((distance % (1000 * 60 * 60))
-								/ (1000 * 60));
+								.floor((distance % (1000 * 60 * 60 * 24))/ (1000 * 60 * 60));
+						var minutes = Math.floor((distance % (1000 * 60 * 60))/ (1000 * 60));
 						var seconds = Math
 								.floor((distance % (1000 * 60)) / 1000);
 						var milliseconds = distance % 10;
@@ -160,11 +171,7 @@
 
 		function sendOnOffToServer() {
 			// num과 onOff 값을 서버로 전송
-			var numValue = $
-			{
-				auction.num
-			}
-			;
+			var numValue = ${auction.num};
 
 			// 서버로 전송할 데이터를 FormData 객체에 추가
 			var formData = new FormData();

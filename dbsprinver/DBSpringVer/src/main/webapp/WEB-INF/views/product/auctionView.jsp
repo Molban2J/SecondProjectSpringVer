@@ -59,7 +59,14 @@
 						</div>
 						<c:if test="${AuctionList.onOff == 0}">
 							<c:if test="${user.userid eq AuctionList.userId}">
+							<c:choose>
+							<c:when test="${AuctionList.endPrice > 0}">
+								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="이미 구매 완료한 상품입니다." onclick="#" disabled="disabled">
+							</c:when>
+							<c:otherwise>
 								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">
+							</c:otherwise>
+							</c:choose>
 							</c:if>
 						</c:if>
 					</div>
