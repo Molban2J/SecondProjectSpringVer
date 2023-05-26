@@ -78,6 +78,9 @@ public interface ProductMapper {
 	//경매 입찰
 	public void dealAuction(AuctionVO auVo);
 	
+	//옥션 endPrice 설정
+	public void setAuctionEndPrice(int num, int endPrice);
+	
 	//기간이 지난 경매(onOff설정)
 	public void endAuction(int num);
 	

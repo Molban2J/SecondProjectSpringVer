@@ -1,15 +1,20 @@
 package com.db.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import com.db.model.OrderVO;
 >>>>>>> kyudong
+=======
+import com.db.model.Criteria;
+>>>>>>> Jongmin2
 import com.db.model.UserVO;
 
 public interface AdminService {
@@ -22,6 +27,7 @@ public interface AdminService {
 
 	public void deleteUser(String userid) throws Exception; // 유저 삭제
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	public UserVO getUser(String userid) throws Exception; //유저 정보
 	
@@ -31,6 +37,8 @@ public interface AdminService {
 	
 	public void deleteBrand(String bname) throws Exception; //브랜드 삭제
 =======
+=======
+>>>>>>> Jongmin2
 
 	public UserVO getUser(String userid) throws Exception; // 유저 정보
 
@@ -40,6 +48,7 @@ public interface AdminService {
 
 	public void deleteBrand(String bname) throws Exception; // 브랜드 삭제
 
+<<<<<<< HEAD
 	// 신규주문 가져오기
 	public ArrayList<OrderVO> getNewOrder() throws Exception;
 
@@ -61,4 +70,11 @@ public interface AdminService {
 	// 주문 취소처리 result -> 5 으로 변경
 	public int withdrawOrderChangeResult(@Param("ordernumber") int ordernumber);
 >>>>>>> kyudong
+=======
+	// 게시판 목록(페이징)
+	public List<UserVO> getUserListPaging(Criteria cri) throws Exception;
+
+	// 게시판 총 갯수
+	public int getUserTotal(Criteria cri) throws Exception;
+>>>>>>> Jongmin2
 }

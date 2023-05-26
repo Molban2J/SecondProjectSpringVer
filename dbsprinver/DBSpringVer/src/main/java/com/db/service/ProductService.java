@@ -101,4 +101,7 @@ public interface ProductService {
 	// 기간이 지난 경매(onOff설정)
 	public void endAuction(int num) throws Exception;
 
+	// 옥션 endPrice 설정
+	public void setAuctionEndPrice(int num, int endPrice) throws Exception;
+
 }

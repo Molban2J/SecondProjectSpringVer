@@ -26,6 +26,7 @@ import com.db.model.CartVO;
 import com.db.model.CouponVO;
 import com.db.model.OrderVO;
 import com.db.model.ProductVO;
+import com.db.model.UserVO;
 import com.db.service.ProductService;
 import com.db.service.UserService;
 
@@ -221,7 +222,12 @@ public class ProductController {
 		request.setAttribute("couplist", couplist);
 		return "/product/checkOut";
 	}
-
+	//옥션 체크아웃
+	@GetMapping("/auctionCheckOut")
+	public void auctionCheckOutGET(int auNum, Model model) throws Exception {
+		AuctionVO auVo = productService.getAuctionDetail(auNum);
+		model.addAttribute("auVo",auVo);
+	}
 	// 결제완료
 	@PostMapping("/purchased")
 	public String purchasedPOST(@Param("cnum") Integer cnum, @Param("cartnum") int cartnum,
@@ -254,6 +260,7 @@ public class ProductController {
 
 		return "/product/orderList";
 	}
+<<<<<<< HEAD
 	//옥션 리스트 페이지
 		@GetMapping("/auctionView")
 		public void auctionViewGET(Model model) throws Exception {
@@ -297,6 +304,29 @@ public class ProductController {
 			productService.endAuction(num);
 		}
 
+=======
+	//옥션 결제완료
+	@PostMapping("auctionPurchased")
+	public String auctionPurchasedPOST(CartVO cart, UserVO uVo, int totalprice, int auNum, int endPrice,Model model) throws Exception {
+		System.out.println("auctionPurchased 실행");
+		productService.addCart(cart);
+		//System.out.println("endPrice: "+endPrice);
+		//productService.setAuctionEndPrice(auNum, endPrice); //옥션 endPrice 설정
+		int orderNumber = productService.getLatestOrderNumber(uVo.getUserid());// orderNumber를 가져옴
+		
+		productService.addOrderDetail(cart, totalprice, orderNumber, uVo.getName(), uVo.getPhone(), uVo.getEmail(), uVo.getAddress1(), uVo.getAddress2(),
+				uVo.getAddress3());
+		productService.cartResultChange(cart.getCartnum(), cart);
+		
+		ArrayList<ProductVO> plist = productService.getAllProduct();
+		model.addAttribute("plist", plist); // 상품정보 불러오고 저장
+
+		ArrayList<OrderVO> olist = productService.getOrderList(orderNumber);
+		model.addAttribute("olist", olist); // 마지막 주문정보를 불러오고 저장
+		
+		return "/product/orderList";
+	}
+>>>>>>> Jongmin2
 
 	//옥션 리스트 페이지
 	@GetMapping("/auctionView")
