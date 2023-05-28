@@ -12,9 +12,11 @@
 <hr>
 <body onload="startTimer()">
 	<!-- Page Header Start -->
+
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
 			<h1 class="font-weight-semi-bold text-uppercase mb-3">Auction</h1>
+
 			<h1>
 				<span id="countdown"></span>
 			</h1>
@@ -28,6 +30,7 @@
 	</div>
 	<!-- Page Header End -->
 
+
 	<!-- Shop Detail Start -->
 	<div class="container-fluid py-5">
 		<div class="row px-xl-5">
@@ -39,9 +42,12 @@
 
 				</div>
 			</div>
+
 			<div class="col-lg-7 pb-5">
 				<h3 class="font-weight-semi-bold">${auction.pName }</h3>
+
 				<h3 class="font-weight-semi-bold mb-4">
+
 					원가 &#8361;
 					<fmt:formatNumber value="${Integer.parseInt(originProduct.price)}" pattern="###,###" />
 				</h3>
@@ -69,8 +75,8 @@
 						</c:otherwise>
 					</c:choose>
 					<div class="d-flex mb-3" style="margin-top: 40px;">
-
-						<h3 class="font-weight-semi-bold">현재가 &#8361;${auction.price }</h3>
+						<h3 class="font-weight-semi-bold">현재가 &#8361;</h3>
+						<span style="font-size: 1.8em; color: black; margin-left: 30px; transform: translate(-8px, -3px);" id="cPrice"><fmt:formatNumber value="${Integer.parseInt(auction.price)}" pattern="###,###" /></span>
 					</div>
 					<c:if test="${auction.onOff== 1 }">
 						<div style="display: flex;">
@@ -83,6 +89,8 @@
 						<input type="hidden" name="num" value="${auction.num }">
 						<input type="hidden" name="onOff" value="${auction.onOff }">
 						<input type="hidden" name="originProduct" value="${originProduct.pname }">
+						<!-- 입력 가격과 현재 가격을 비교를 위한 input -->
+						<input type="hidden" name="currentPrice" id="currentPrice" value="${auction.price }">
 						<c:choose>
 							<c:when test="${auction.onOff==0 }">
 
@@ -98,7 +106,7 @@
 									</c:choose>
 
 								</c:if>
-								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='DBServlet?command=auction_view'">
+								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='/product/auctionView'">
 							</c:when>
 							<c:otherwise>
 								<c:if test="${not empty user.userid}">
@@ -223,11 +231,16 @@
 		  });
 		}
 
+		function formatPrice(price) {
+		    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
 		function updatePrice(price) {
-			const priceEl = document.getElementById('cPrice');
-			priceEl.innerText = price; // span 요소인 경우
-			const curruntPrice = document.getElementById('currentPrice');
-			currentPrice.value = price;
+		    const priceEl = document.getElementById('cPrice');
+		    priceEl.innerText = formatPrice(price);
+
+		    const currentPrice = document.getElementById('currentPrice');
+		    currentPrice.value = formatPrice(price);
 		}
 
 	</script>
