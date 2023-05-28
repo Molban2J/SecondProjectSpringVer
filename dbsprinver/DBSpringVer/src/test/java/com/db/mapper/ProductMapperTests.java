@@ -1,12 +1,16 @@
 package com.db.mapper;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.db.model.AuctionVO;
+import com.db.model.BrandVO;
+import com.db.model.CartVO;
+import com.db.model.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -124,22 +128,9 @@ public class ProductMapperTests {
 	}
 	*/
 	
-//	@Test
-//	public void addorders() throws Exception{
-//		String userid = "user";
-//		productmapper.addOrders(userid);
-//	}
 	@Test
-	public void test() {
-//		String param1 = "Ex-Libris Print Shirt";
-//		String param2 = "m";
-//		ProductVO vo = productmapper.productDetailByPnamepSize(param1, param2);
-//		System.out.println(vo);
-		
-		int arg1 = 21;
-		int param1 = 111;
-		productmapper.setAuctionEndPrice(arg1,param1);
-		AuctionVO auction =productmapper.getAuctionDetail(arg1);
-		System.out.println("auction: "+auction);
+	public void addorders() throws Exception{
+		String userid = "user";
+		productmapper.addOrders(userid);
 	}
 }

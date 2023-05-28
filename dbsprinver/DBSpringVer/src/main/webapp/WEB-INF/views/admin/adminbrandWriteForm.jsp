@@ -4,11 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>브랜드 등록</title>
-<!-- 
-<script type="text/javascript" src="script/admin.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
 <style>
 .image-regit {
 	position: absolute;
@@ -50,25 +46,20 @@
 	opacity: 0.5;
 }
 </style>
-
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
 	<hr>
-	<div>
-
-		<!-- Page Header Start -->
-		<div class="container bg-secondary mb-3" style="max-width: 800px;">
-			<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
-				<h1 class="font-weight-semi-bold text-uppercase mb-3">브랜드 등록</h1>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">브랜드 등록</h1>
+			<div class="d-inline-flex">
 				<p class="m-0">
 					<a href="adminBrandList">Brand List</a>
 				</p>
 			</div>
 		</div>
 	</div>
-	<!-- Page Header End -->
-
 	<!-- Shop Detail Start -->
 	<div class="container-fluid py-5">
 		<form action="brandWrite.do" method="post" name="frm" enctype="multipart/form-data">
@@ -77,13 +68,11 @@
 					<div id="product-carousel" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner border" style="height: 500px;">
 							<div class="blur">이미지 등록</div>
-
 							<input type="file" class="btn btn-primary px-3 image-regit" name="uploadFile" id="file-upload-1" onchange="previewFile(), selectSameFile(event)">
 							<img style="width: 100%;" class="img-fluid preview-img" src="" alt="">
 						</div>
 					</div>
 				</div>
-
 				<div class="col-lg-7 pb-5">
 					<div class="d-flex mb-3" style="margin-top: 150px;">
 						<p class="text-dark font-weight-medium mb-0 mr-3">Brand Name:</p>
@@ -104,7 +93,6 @@
 			</div>
 		</form>
 	</div>
-
 	<!-- Shop Detail End -->
 	<hr>
 	<script>
@@ -113,6 +101,7 @@
 			const preview = document.querySelector('.preview-img');
 			const file = event.target.files[0];
 			const reader = new FileReader();
+
 			reader.addEventListener("load", function() {
 				// 파일을 읽어서 이미지 URL로 설정합니다.
 				preview.src = reader.result;

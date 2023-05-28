@@ -7,11 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
-
-import com.db.model.OrderVO;
-
 import com.db.model.Criteria;
-
+import com.db.model.OrderVO;
 import com.db.model.UserVO;
 
 public interface AdminService {
@@ -22,7 +19,7 @@ public interface AdminService {
 	// <유저 관리>
 	public ArrayList<UserVO> getUserList() throws Exception; // 유저 목록
 
-	public void deleteUser(String userid) throws Exception; // 유저 삭
+	public void deleteUser(String userid) throws Exception; // 유저 삭제
 
 	public UserVO getUser(String userid) throws Exception; // 유저 정보
 

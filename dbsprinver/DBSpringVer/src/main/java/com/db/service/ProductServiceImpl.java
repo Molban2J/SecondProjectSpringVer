@@ -197,13 +197,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void setAuctionEndPrice(int num, int endPrice) throws Exception {
-		productmapper.setAuctionEndPrice(num, endPrice);
+	public ProductVO productDetailByPnamepSize(String pname, String psize) throws Exception {
+		return productmapper.productDetailByPnamepSize(pname, psize);
 	}
 
 	@Override
-	public ProductVO productDetailByPnamepSize(String pname, String psize) throws Exception {
-		return productmapper.productDetailByPnamepSize(pname, psize);
+	public void setAuctionEndPrice(int num, int endPrice) throws Exception {
+		productmapper.setAuctionEndPrice(num, endPrice);
+		
 	}
 
 }

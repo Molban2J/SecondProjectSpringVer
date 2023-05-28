@@ -64,28 +64,28 @@ public interface ProductMapper {
 
 	// 장바구니 상품 삭제
 	public int cartDelete(int cartnum);
-	
-	//제품 이름으로 제품 불러오기
+
+	// 제품 이름으로 제품 불러오기
 	public ProductVO productDetailByPname(String name);
-	
-	//제품 이름,사이즈로 제품 불러오기
+
+	// 제품 이름,사이즈로 제품 불러오기
 	public ProductVO productDetailByPnamepSize(String pname, String psize);
-	
-	//옥션 목록 가져오기
+
+	// 옥션 목록 가져오기
 	public ArrayList<AuctionVO> getAuctionList();
-	
-	//옥션 상세 보기
+
+	// 옥션 상세 보기
 	public AuctionVO getAuctionDetail(int num);
-	
-	//경매 입찰
-	public void dealAuction(AuctionVO auVo);
-	
-	//옥션 endPrice 설정
+
+	// 옥션 endPrice 설정
 	public void setAuctionEndPrice(int num, int endPrice);
-	
-	//기간이 지난 경매(onOff설정)
+
+	// 경매 입찰
+	public void dealAuction(AuctionVO auVo);
+
+	// 기간이 지난 경매(onOff설정)
 	public void endAuction(int num);
-	
+
 	// 결제 정보 추가(orders table)
 	public void addOrders(String userid);
 

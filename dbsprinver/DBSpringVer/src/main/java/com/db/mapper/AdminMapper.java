@@ -13,7 +13,6 @@ import com.db.model.UserVO;
 
 public interface AdminMapper {
 
-
 	public int insertAuction(AuctionVO aVo); // 옥션 등록
 
 	public ArrayList<UserVO> getUserList(); // 유저 목록
@@ -51,8 +50,7 @@ public interface AdminMapper {
 
 	// 게시판 목록(페이징)
 	public List<UserVO> getUserListPaging(Criteria cri);
-	
+
 	// 게시판 총 갯수
 	public int getUserTotal(Criteria cri);
-
 }

@@ -5,16 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Auction</title>
 <script>
 	
 </script>
 </head>
-
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
 	<hr>
-
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
@@ -25,12 +22,13 @@
 				</p>
 			</div>
 		</div>
+		<c:if test="${AuctionList.size()==0 }">
+			<h3 style="text-align: center;">진행된 옥션이 없습니다.</h3>
+		</c:if>
 	</div>
-
 	<!-- Page Header End -->
 	<!-- Shop Start -->
 	<div id="my-container" class="container-fluid pt-5">
-
 		<!-- Shop Product Start -->
 		<div class="col-lg-9 col-md-12">
 			<div class="row pb-3">
@@ -38,13 +36,12 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 pb-1" align="center">
 						<div class="card product-item border-0 mb-4">
 							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<a href="auctionDetail?num=${AuctionList.num}&pName=${AuctionList.pName}">
+								<a href="auctionDetail?num=${AuctionList.num}&pName=${AuctionList.pname}">
 									<img class="img-fluid w-100" style="height: 280px" src="../resources/img/${AuctionList.imgUrl}" alt="">
 								</a>
-
 							</div>
 							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3">${AuctionList.pName}</h6>
+								<h6 class="text-truncate mb-3">${AuctionList.pname}</h6>
 								<c:if test="${AuctionList.onOff == 1}">
 									<p>경매 진행중</p>
 								</c:if>
@@ -58,20 +55,19 @@
 							</div>
 						</div>
 						<c:if test="${AuctionList.onOff == 0}">
-							<c:if test="${user.userid eq AuctionList.userId}">
-							<c:choose>
-							<c:when test="${AuctionList.endPrice > 0}">
-								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="이미 구매 완료한 상품입니다." onclick="#" disabled="disabled">
-							</c:when>
-							<c:otherwise>
-								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">
-							</c:otherwise>
-							</c:choose>
+							<c:if test="${user.userid eq AuctionList.userid}">
+								<c:choose>
+									<c:when test="${AuctionList.endPrice > 0}">
+										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매 완료" onclick="#" disabled="disabled">
+									</c:when>
+									<c:otherwise>
+										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">
+									</c:otherwise>
+								</c:choose>
 							</c:if>
 						</c:if>
 					</div>
 				</c:forEach>
-
 			</div>
 		</div>
 		<!-- Shop Product End -->
@@ -80,5 +76,4 @@
 	<hr>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
-
 </html>

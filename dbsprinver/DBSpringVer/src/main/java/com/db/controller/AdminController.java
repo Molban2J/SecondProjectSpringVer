@@ -3,12 +3,12 @@ package com.db.controller;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +18,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.db.mapper.PageMakerDTO;
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
-
-import com.db.model.OrderVO;
-
 import com.db.model.Criteria;
-import com.db.model.FBoardReplyVO;
-
+import com.db.model.OrderVO;
 import com.db.model.ProductVO;
 import com.db.model.UserVO;
 import com.db.service.AdminService;
@@ -89,7 +81,6 @@ public class AdminController {
 	public String addAuctionPOST(AuctionVO vo, RedirectAttributes rttr, String dateTimeInput) throws Exception {
 
 		vo.setPrice(vo.getStartPrice());
-
 		Timestamp endTime = Timestamp.valueOf(dateTimeInput.replace("T", " ").concat(":00"));
 		vo.setEndTime(endTime);
 
@@ -206,19 +197,16 @@ public class AdminController {
 			uploadFile.transferTo(saveFile);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 		BrandVO brand = new BrandVO();
 		brand.setBname(bname);
 		brand.setImgurl(uploadFileName);
 		adminService.brandEnroll(brand);
 		return "redirect:/admin/adminBrandList";
-
 	}
 
 	@GetMapping("adminBrandDelete")
 	public void adminBrandDelete(Model model) throws Exception {
-
 		System.out.println("adminBrandDelete 접속");
 		List<BrandVO> bList = productService.brandList();
 		model.addAttribute("blist", bList);
@@ -228,7 +216,6 @@ public class AdminController {
 	public String deleteBrandPOST(String bname) throws Exception {
 		System.out.println("deleteBrand.do 실행");
 		System.out.println("삭제할 브랜드:" + bname);
-
 		adminService.deleteBrand(bname);
 		return "redirect:/admin/adminBrandList";
 	}

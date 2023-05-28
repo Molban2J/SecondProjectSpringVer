@@ -14,7 +14,6 @@ img {
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
-
 	<hr>
 	<div id="wrap" align="center">
 		<hr>
@@ -36,7 +35,6 @@ img {
 				</c:forEach>
 			</div>
 		</div>
-		<input type="button" class="btn btn-primary px-3" value="뒤로가기" onclick="location.href='adminBrandList'">
 	</div>
 	<hr>
 </body>

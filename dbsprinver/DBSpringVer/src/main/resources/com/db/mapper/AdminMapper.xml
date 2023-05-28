@@ -5,11 +5,11 @@
 <mapper namespace="com.db.mapper.AdminMapper">
 <!-- 옥션등록 -->
 	<insert id="insertAuction">
-		insert into auction (userId, bName, pName, price,
+		insert into auction (userid, bname, pname, price,
 		startPrice, endTime,
-		onOff, pSize, imgUrl,num)
-		values(#{userId},
-		#{bName}, #{pName}, #{price}, #{startPrice}, #{endTime}, 1, #{pSize},
+		onOff, psize, imgUrl,num)
+		values(#{userid},
+		#{bname}, #{pname}, #{price}, #{startPrice}, #{endTime}, 1, #{psize},
 		#{imgUrl},auction_seq.nextval)
 	</insert>
 	

@@ -6,8 +6,8 @@
 }
 </style>
 	<!-- Footer Start -->
-	<div class="container-fluid bg-secondary text-dark mt-5 pt-5">
-		<div class="row px-xl-5 pt-5">
+	<div class="container-fluid bg-secondary text-dark">
+		<div class="row px-xl-5 pt-4">
 			<div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5 foop">
 				<img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 				<p></p>

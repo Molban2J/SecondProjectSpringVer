@@ -98,13 +98,13 @@ public interface ProductService {
 	// 옥션 상세 보기
 	public AuctionVO getAuctionDetail(int num) throws Exception;
 
+	// 옥션 endPrice 설정
+	public void setAuctionEndPrice(int num, int endPrice) throws Exception;
+
 	// 경매 입찰
 	public void dealAuction(AuctionVO auVo) throws Exception;
 
 	// 기간이 지난 경매(onOff설정)
 	public void endAuction(int num) throws Exception;
-
-	// 옥션 endPrice 설정
-	public void setAuctionEndPrice(int num, int endPrice) throws Exception;
 
 }

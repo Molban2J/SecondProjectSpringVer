@@ -4,25 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
 <meta charset="UTF-8">
 <title>유저 관리 페이지</title>
 <style>
-.table {
-	width: 70%;
-	border: none;
-	table-layout: auto;
-	overflow: hidden; /* 넘치는 부분 감추기 */
-	text-overflow: ellipsis;
-
-
-}
-.row{
-	width:80%;
-	margin: 0 auto;
-}
 th {
 	border: solid 1px gray;
 	border-collapse: collapse;
@@ -37,34 +22,13 @@ td {
 	text-align: center;
 }
 
-
 .hiddentd {
-
 	width: 100px;
-	border: none;
 	text-align: center;
 }
 
-.hiddenbutton {
-	display: none;
-}
-
 .button:hover {
-	background-color: pink;
-	font-weight: 600;
-}
-
-tr:hover .hiddenbutton {
-	display: block;
-}
-
-tr:hover .hiddentd {
-	background-color: white;
-}
-
-
-tr:hover .hiddenbutton {
-	display: block;
+	background-color: #D9D9D9;
 }
 
 tr:hover .hiddentd {
@@ -73,6 +37,10 @@ tr:hover .hiddentd {
 
 .point {
 	width: 10px;
+}
+
+table.table {
+	font-size: 11px;
 }
 </style>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -89,23 +57,22 @@ tr:hover .hiddentd {
 			</div>
 		</div>
 	</div>
-	<div style="height: 550px; width: 90%; margin: 0 auto;">
-		<div class="row">
-			<table class="table" style=" text-align: center; border: 1px solid #dddddd">
+	<div>
+		<div class="row" style="margin-left: 30px; margin-right: 30px">
+			<table class="table" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">아이디</th>
 						<th style="background-color: #eeeeee; text-align: center;">이름</th>
 						<th style="background-color: #eeeeee; text-align: center;">성별</th>
-						<th style="background-color: #eeeeee; text-align: center; width: 40%;">이메일</th>
-						<th style="background-color: #eeeeee; text-align: center;">주소</th>
-						<th style="background-color: #eeeeee; text-align: center;">상세주소</th>
+						<th style="background-color: #eeeeee; text-align: center;">이메일</th>
 						<th style="background-color: #eeeeee; text-align: center;">우편번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">주소</th>
 						<th style="background-color: #eeeeee; text-align: center;">전화번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">등급</th>
 						<th style="background-color: #eeeeee; text-align: center;">포인트</th>
 						<th style="background-color: #eeeeee; text-align: center;">가입일자</th>
-						<td style="border: none; color: white;">b u t t o n</td>
+						<th style="background-color: #eeeeee; text-align: center;">관리</th>
 					</tr>
 				</thead>
 				<c:forEach var="list" items="${list }">
@@ -121,9 +88,8 @@ tr:hover .hiddentd {
 							</c:when>
 						</c:choose>
 						<td>${list.email }</td>
-						<td>${list.address3 }</td>
-						<td>${list.address2 }</td>
 						<td>${list.address1 }</td>
+						<td>${list.address2 },${list.address3 }</td>
 						<td>${list.phone }</td>
 						<c:choose>
 							<c:when test="${list.grade == 0 }">
@@ -133,39 +99,28 @@ tr:hover .hiddentd {
 								<td>관리자</td>
 							</c:when>
 							<c:when test="${list.grade == 2 }">
-								<td>골드</td>
+								<td>실버</td>
 							</c:when>
 							<c:when test="${list.grade == 3 }">
-								<td>플래티넘</td>
+								<td>골드</td>
 							</c:when>
 							<c:when test="${list.grade == 4 }">
-								<td>VIP</td>
-							</c:when>
-							<c:when test="${list.grade == 5 }">
-								<td>VVIP</td>
+								<td>다이아</td>
 							</c:when>
 							<c:otherwise>
 								<td>관리자</td>
 							</c:otherwise>
 						</c:choose>
 						<td>${list.point }</td>
-						<td>
-							<fmt:formatDate value="${list.enter }" />
-						</td>
-
-						<td class="hiddentd">
-							<input type="button" class="btn-primary px-3 hiddenbutton" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${list.userid }')">
-							<input type="button" class="btn-primary px-3 delete hiddenbutton" value="삭제" onclick="location.href='/admin/userDelete?shopUserid=${list.userid }'">
-						</td>
-
-
+						<td><fmt:formatDate value="${list.enter }" /></td>
+						<td class="hiddentd"><input type="button" class="btn-primary px-3 hiddenbutton" value="수정" onclick="open_win('/admin/userManagementEdit?userid=${list.userid }')"> <input type="button" class="btn-primary px-3 delete hiddenbutton" value="삭제" onclick="if (confirm('유저를 탈퇴 처리 하시겠습니까?')) { location.href='/admin/userDelete?shopUserid=${list.userid}' };"></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
 	<div class="search_wrap">
-		<div class="search_area" style="margin-left: 500px;">
+		<div class="search_area" style="margin-left: 400px;">
 			<select name="type">
 				<option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 				<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>유저 아이디</option>
@@ -184,25 +139,21 @@ tr:hover .hiddentd {
 					<ul id="pageInfo" class="pagination justify-content-center mb-3">
 						<!-- 이전 페이지 버튼 -->
 						<c:if test="${pageMaker.prev}">
-							<li class="page-item">
-								<a class="page-link" href="${pageMaker.startPage-1}" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
-								</a>
-							</li>
+							<li class="page-item"><a class="page-link" href="${pageMaker.startPage-1}" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a></li>
 						</c:if>
 						<!-- 각 번호 페이지 버튼 -->
 						<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-							<li class="page-item ${pageMaker.cri.pageNum == num ? 'active' : ''}">
-								<a class="page-link" href="${num}">${num}</a>
-							</li>
+							<li class="page-item ${pageMaker.cri.pageNum == num ? 'active' : ''}"><a class="page-link" href="${num}">${num}</a></li>
 						</c:forEach>
 						<!-- 다음 페이지 버튼 -->
 						<c:if test="${pageMaker.next}">
-							<li class="page-item">
-								<a class="page-link" href="${pageMaker.endPage + 1}" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>
-								</a>
-							</li>
+							<li class="page-item"><a class="page-link" href="${pageMaker.endPage + 1}" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -216,13 +167,11 @@ tr:hover .hiddentd {
 			<input type="hidden" name="category" value="${pageMaker.cri.category}">
 		</form>
 	</div>
-
-	<jsp:include page="../footer.jsp"></jsp:include>
-
+	<hr>
 	<script>
 		function open_win(url) {
 			// 새 창의 속성들을 설정하는 문자열입니다.
-			var specs = "width=900,height=500,left=200,top=200";
+			var specs = "width=900,height=600,left=200,top=200";
 
 			// 새 창을 엽니다.
 			window.open(url, "_blank", specs);
@@ -231,7 +180,6 @@ tr:hover .hiddentd {
 		//페이징 스크립트
 		let moveForm = $("#moveForm");
 
-	
 		$("#pageInfo a").on("click", function(e) {
 			e.preventDefault();
 			moveForm.find("input[name='pageNum']").val($(this).attr("href"));

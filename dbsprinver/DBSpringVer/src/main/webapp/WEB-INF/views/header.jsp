@@ -55,13 +55,15 @@ body {
 				<c:if test="${user != null}">
 					<div id="cart-badge">
 						<a href="/product/myCart?userid=${user.userid}" class="btn border">
-							<i class="fas fa-shopping-cart text-primary"></i> <span class="badge"></span>
+							<i class="fas fa-shopping-cart text-primary"></i>
+							<span class="badge"></span>
 						</a>
 					</div>
 				</c:if>
 				<c:if test="${user == null}">
 					<a class="btn border" onclick="alert('로그인 후에 이용이 가능합니다.'); return false;">
-						<i class="fas fa-shopping-cart text-primary"></i> <span class="badge"></span>
+						<i class="fas fa-shopping-cart text-primary"></i>
+						<span class="badge"></span>
 					</a>
 				</c:if>
 			</div>
@@ -113,7 +115,6 @@ body {
 									<a href="/board/list?pageNum=1&amount=10&category=S&keyword=&type=" class="dropdown-item">공지사항</a>
 								</div>
 							</div>
-
 							<a href="/qna" class="nav-item nav-link">Q&A</a>
 							<a href="/product/auctionView" class="nav-item nav-link">Auction</a>
 							<a href="/product/saleList" class="nav-item nav-link">Sale</a>
@@ -137,11 +138,9 @@ body {
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
 									<div class="dropdown-menu rounded-0 m-0">
 										<a href="/admin/userManagementPage" class="dropdown-item">회원 관리</a>
-
 										<a href="/admin/auctionPage" class="dropdown-item">옥션 관리</a>
 										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
 										<a href="/admin/sales_OrderManagement" class="dropdown-item">매출&주문 관리</a>
-
 									</div>
 								</div>
 							</c:if>
@@ -152,22 +151,26 @@ body {
 										<div class="dropdown-menu rounded-0 m-0">
 											<c:if test="${user.grade == 0 }">
 												<h6 style="text-align: center;">
-													<span style="color: #775e39;">Bronze</span> 등급
+													<span style="color: #775e39;">Bronze</span>
+													등급
 												</h6>
 											</c:if>
 											<c:if test="${user.grade == 2 }">
 												<h6 style="text-align: center;">
-													<span style="color: #c0c0c0;">Silver</span> 등급
+													<span style="color: #c0c0c0;">Silver</span>
+													등급
 												</h6>
 											</c:if>
 											<c:if test="${user.grade == 3 }">
 												<h6 style="text-align: center;">
-													<span style="color: #ffd700;">Gold</span> 등급
+													<span style="color: #ffd700;">Gold</span>
+													등급
 												</h6>
 											</c:if>
 											<c:if test="${user.grade == 4 }">
 												<h6 style="text-align: center;">
-													<span style="color: #87ddb1;">Diamond</span> 등급
+													<span style="color: #87ddb1;">Diamond</span>
+													등급
 												</h6>
 											</c:if>
 											<div style="text-align: center;">
