@@ -16,7 +16,7 @@ img {
 	top: 50%;
 	left: 50%;
 	color: white;
-	font-size: 2.5em;
+	font-size: 3em;
 	font-weight: 300;
 	transform: translate(-50%, -50%);
 	text-align: center;

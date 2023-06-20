@@ -34,7 +34,7 @@
 							<div class="card product-item border-0 mb-4">
 								<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
 									<a href='/product/productDetail?num=<c:out value="${bplist.num }"/>&pname=${bplist.pname}'>
-										<img class="img-fluid w-100" style="height: 240px" src="../resources/img/${bplist.imgUrl}" alt="">
+										<img class="img-fluid w-100" style="height: 240px" src="/admin/display?fileName=${bplist.imgUrl}" alt="">
 									</a>
 								</div>
 								<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">

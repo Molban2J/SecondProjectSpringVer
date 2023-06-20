@@ -39,7 +39,7 @@
 			<div class="col-lg-5 pb-5">
 				<div id="product-carousel" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner border">
-						<img class="w-100 h-100" style="height: 280px" src="../resources/img/${product.imgUrl}" alt="Image">
+						<img class="w-100 h-100" style="height: 280px" src="/admin/display?fileName=${product.imgUrl}" alt="Image">
 					</div>
 				</div>
 			</div>

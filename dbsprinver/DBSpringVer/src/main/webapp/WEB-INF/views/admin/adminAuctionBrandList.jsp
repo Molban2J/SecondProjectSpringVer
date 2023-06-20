@@ -30,7 +30,7 @@
 					<div class="cat-item text-center" style="padding: 30px;">
 						<p class="text-right"></p>
 						<a href="/admin/adminAuctionBrandProductList?bname=${list.bname }" class="cat-img position-relative overflow-hidden mb-3">
-							<img class="img-fluid" src="../resources/img/${list.imgurl}" alt="">
+							<img class="img-fluid" src="/admin/display?fileName=${list.imgurl}" alt="">
 						</a>
 						<h5 class="font-weight-semi-bold m-0"></h5>
 					</div>
