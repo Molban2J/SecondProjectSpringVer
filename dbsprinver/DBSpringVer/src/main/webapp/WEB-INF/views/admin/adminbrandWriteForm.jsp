@@ -121,23 +121,97 @@
 			}
 		}
 
-		let regex = new RegExp("(.*?)\.(jpg|png)$");
-		let maxSize = 1048576 * 5; //5MB	
+		$("input[type='file']").on("change", function(e){
+			alert("동작 확인");
 
-		function fileCheck(fileName, fileSize) {
+			/*이미지 존재 시 삭제
+			if($(".imgDeleteBtn").length > 0){
+				deleteFile();
+			} */
+			
+			let formData = new FormData();
+			let fileInput=$('input[name="uploadFile"]');
+			let fileList=fileInput[0].files;
+			let fileObj=fileList[0];
+			
+			console.log("fileList : "+ fileList);
+			console.log("fileObj : " + fileObj);
+			console.log("fileName : "+ fileObj.name);
+			console.log("fileSize : " + fileObj.size);
+			console.log("fileType(MimeType) : " + fileObj.type);
 
-			if (fileSize >= maxSize) {
+			if(!fileCheck(fileObj.name, fileObj.size)){
+				return false;
+			}
+			
+			alert("통과");
+			formData.append("uploadFile", fileObj);
+			
+			$.ajax({
+				url: '/admin/uploadAjaxAction', //서버로 요청을 보낼 url
+				processData : false, // 서버로 전송할 데이터를 queryString 형태로 변환할지 여부
+				contentType : false, // 서버로 전송되는 데이터의 content-type 
+				data : formData, // 서버로 전송할 데이터
+				type : 'POST', // 서버로 요청 타입 (get, post)
+				dataType : 'json', // 서버로부터 반환받을 데이터 타입 
+				success : function(result){
+					console.log(result);
+					showUploadImage(result);
+				},
+				error: function(result){
+					console.log(result);
+					alert("업로드 실패");
+				}
+			});
+		});
+		
+		
+		/*var, mehtod related with attachFile*/
+		let regex  = new RegExp("(.*?)\.(jpg|png)$");
+		let maxSize = 1048576; //1MB
+		
+		function fileCheck(fileName, fileSize){
+			if(fileSize >= maxSize){
 				alert("파일 사이즈 초과");
+				return false;	
+			}
+			
+			if(!regex.test(fileName)){
+				alert("해당 종류의 파일은 업로드 할 수 없습니다.");
 				return false;
 			}
-
-			if (!regex.test(fileName)) {
-				alert("해당 종류의 파일은 업로드할 수 없습니다.");
-				return false;
-			}
-
 			return true;
 		}
+		
+		function showUploadImage(uploadResultArr) {
+			console.log("showUploadImage called");
+			console.log(uploadResultArr);
+
+			  let uploadResult = $("#uploadResult");
+
+			  let str = "";
+			 
+			  for (let i = 0; i < uploadResultArr.length; i++) {
+			    let obj = uploadResultArr[i];
+
+			    if (!obj || !obj.imgUrl) {
+			      console.log("Invalid object or missing imgUrl property");
+			      continue;
+			    }
+
+			    let fileCallPath = "/admin/display?fileName=" + obj.imgUrl;
+			    
+				console.log("obj.imgUrl : " + obj.imgUrl);
+			    console.log("fileCallPath: " + fileCallPath);
+			    str += "<div id='result_card'>";
+			    str += "<img src='"+fileCallPath+"'>";
+			    str += "<div class='imgDeleteBtn'>x</div>";
+			    str += "</div>";
+			    
+			    console.log("Appending the following HTML string: " + str);
+			  }
+				uploadResult.html(str);
+			}
 	</script>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>

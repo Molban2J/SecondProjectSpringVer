@@ -182,7 +182,7 @@ public class AdminController {
 	@PostMapping("brandWrite.do")
 	public String brandWritePOST(String bname, MultipartFile uploadFile) throws Exception {
 		System.out.println("brandWrite.do 접속");
-		String uploadFolder = "C:\\Users\\User\\OneDrive\\바탕 화면\\Develop\\DiamondBlakc-SpringVer\\src\\main\\webapp\\resources\\img";
+		String uploadFolder = "C:\\Users\\user\\Documents\\SecondProjectSpringVer\\dbsprinver\\DBSpringVer\\src\\main\\webapp\\resources\\img";
 
 		/* 폴더 생성 */
 		File uploadPath = new File(uploadFolder);
@@ -259,7 +259,7 @@ public class AdminController {
 			
 			if (osName.contains("win")) { // Windows
 				System.out.println("현재 접속 중인 os : "+osName);
-				uploadFolder = "C:\\upload\\temp";
+				uploadFolder = "C:\\Users\\user\\Documents\\SecondProjectSpringVer\\dbsprinver\\DBSpringVer\\src\\main\\webapp\\resources\\img";
 				System.out.println("지금 설정된 uploadFolder 경로 : "+uploadFolder);
 			} else if (osName.contains("nix") || osName.contains("nux") || osName.contains("mac")) { // Linux, macOS
 				System.out.println("현재 접속 중인 os : "+osName);
@@ -322,7 +322,7 @@ public class AdminController {
 			String filePath;
 			if (osName.contains("win")) { // Windows
 				System.out.println("현재 접속 중인 os : "+osName);
-				filePath="C:\\upload\\temp\\";
+				filePath="C:\\Users\\user\\Documents\\SecondProjectSpringVer\\dbsprinver\\DBSpringVer\\src\\main\\webapp\\resources\\img\\";
 			} else if (osName.contains("nix") || osName.contains("nux") || osName.contains("mac")) { // Linux, macOS
 				System.out.println("현재 접속 중인 os : "+osName);
 				filePath = System.getProperty("user.home") + "/workspace/upload/tmp";
